@@ -838,7 +838,15 @@ $('sCopy').onclick = function () { var u = gameURL(); (navigator.clipboard ? nav
 var gcOn = LAUNCH && !DEBUG;
 if (gcOn) { window.goatcounter = { path: gameBase() + (LANGDIR ? LANGDIR + '/' : '') }; var gs = document.createElement('script'); gs.async = true; gs.src = gameBase() + 'count.js';
   gs.setAttribute('data-goatcounter', 'https://jtaczala-games.goatcounter.com/count'); document.head.appendChild(gs); }
-function track(n) { if (DEBUG) (window.__gcLog = window.__gcLog || []).push(n); if (!gcOn) return;
+/* Play time (anonymous): 'redning-time-<bucket>' sent once per game, on game over or when the page is left. Nothing stored. */
+var gcT0 = 0;
+function gcBucket() { var m = (Date.now() - gcT0) / 60000; gcT0 = 0; return 'time-' + (m < 1 ? '0-1m' : m < 3 ? '1-3m' : m < 5 ? '3-5m' : m < 10 ? '5-10m' : m < 20 ? '10-20m' : '20m+'); }
+function gcLeave() { if (!gcT0) return; var n = gcBucket(); if (DEBUG) (window.__gcLog = window.__gcLog || []).push(n); if (!gcOn) return;
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'redning-' + n, title: 'redning ' + n, event: true }); } catch (e) {} }
+document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') gcLeave(); });
+window.addEventListener('pagehide', gcLeave);
+function track(n) { if (n === 'game-start') gcT0 = Date.now(); else if (n === 'game-finish' && gcT0) track(gcBucket());
+  if (DEBUG) (window.__gcLog = window.__gcLog || []).push(n); if (!gcOn) return;
   setTimeout(function () { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'redning-' + n, title: 'redning ' + n, event: true }); } catch (e) {} }, 300); }
 /* ---------------- animated intro (canvas, game art): first visit only, replay from the menu ---------------- */
 var tr = function (k, o) { return t(k, o); };
