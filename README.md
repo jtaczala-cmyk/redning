@@ -1,11 +1,11 @@
 # Redning
 
 Free mobile-first browser arcade game by Stop60: an original side-scrolling rescue shooter on a wrapping planet.
-Fly left/right, shoot alien landers before their tractor beams lift the little humans away (abducted humans become mutants),
-catch falling humans and set them down safely. Radar strip, smart bombs, waves, 3 lives.
+Fly left/right, shoot alien grabbers before their tractor beams lift the little humans away (abducted humans become mutants),
+catch falling humans and set them down safely. Radar strip, shock pulses, waves, 3 lives, animated intro. Privacy: /personvern/ (/prywatnosc/, /en/privacy/), licences: /lisenser/.
 
 - Single self-contained `index.html` (inline JS/CSS, embedded fonts) + `/pl/` and `/en/` entry pages; Norwegian default
-- One-finger drag on iPhone (fires while touching), ✸ smart-bomb button; keyboard on desktop
+- One-finger drag on iPhone (fires while touching), ✸ shock-pulse button; keyboard on desktop
 - Opt-in online leaderboard: shared Stop60 Supabase table `public.scores`, `game = 'redning'`, only via the checked RPC `redning_submit` (see `supabase/supabase_redning.sql`)
 - Laget med lidenskap – gratis for alle. No ads, no account, no cookies.
 
