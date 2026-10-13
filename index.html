@@ -238,10 +238,11 @@ a{color:var(--teal)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 #cv{background:#05040a;border-radius:14px}
-#bombBtn{position:absolute;right:8px;bottom:10px;z-index:4;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ff6b75,#c3121e 60%,#7a0a12);border:2px solid #ff9aa1;color:#fff;font:600 11px/1.05 var(--disp);letter-spacing:.08em;box-shadow:0 0 18px rgba(255,60,80,.55);touch-action:none;display:grid;place-items:center}
+#bombBtn{position:fixed;left:0;top:0;z-index:4;width:var(--bs,64px);height:var(--bs,64px);border-radius:50%;background:radial-gradient(circle at 40% 35%,#ff6b75,#c3121e 60%,#7a0a12);border:2px solid #ff9aa1;color:#fff;font:600 11px/1.05 var(--disp);letter-spacing:.08em;box-shadow:0 0 18px rgba(255,60,80,.55);touch-action:none;display:grid;place-items:center}
 #bombBtn b{display:block;font-size:20px;line-height:1}
-#bombBtn:active{transform:scale(.93)}
+#bombBtn:active{filter:brightness(.8)}
 #bombBtn[disabled]{opacity:.35;box-shadow:none}
+#sai{position:fixed;left:0;top:0;width:0;height:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
 #hint2{position:absolute;left:0;right:0;bottom:16px;text-align:center;font:500 12px/1.3 var(--disp);letter-spacing:.18em;text-transform:uppercase;color:var(--teal2);pointer-events:none;text-shadow:0 0 8px #000;transition:opacity .4s;opacity:0}
 .wm2{font:600 54px/1 var(--disp);letter-spacing:.1em;text-transform:uppercase;color:#fff;margin:6px 0 2px;text-align:center;text-shadow:0 0 6px #2dd4bf,0 0 18px #2dd4bf,0 0 34px rgba(225,29,42,.8)}
 .tsub2{text-align:center;font:500 12px/1 var(--disp);letter-spacing:.34em;text-transform:uppercase;color:var(--teal2);margin:0 0 10px}
@@ -268,7 +269,7 @@ a{color:var(--teal)}
   <section id="stage"><canvas id="cv" aria-label="Playfield"></canvas>
     <div id="banner"><b id="bnT"></b><small id="bnS"></small></div><div id="toast" role="status" aria-live="polite"></div>
     <button id="bombBtn" aria-label="Smart bomb" hidden><span><b>✸</b><span data-t="bomb">BOMBE</span></span></button>
-    <div id="hint2" data-t="dragHint"></div>
+    <i id="sai"></i><div id="hint2" data-t="dragHint"></div>
   </section>
   <p id="kbd" class="auto"></p>
   <footer id="foot" data-t="free">Laget med lidenskap – gratis for alle</footer>
@@ -546,8 +547,21 @@ function layout() {
   var s = Math.min(w / LW, h / LH), cw = Math.floor(LW * s), ch = Math.floor(LH * s); DPR = Math.min(window.devicePixelRatio || 1, 2.5);
   cv.style.width = cw + 'px'; cv.style.height = ch + 'px'; cv.width = Math.round(cw * DPR); cv.height = Math.round(ch * DPR); K = cv.width / LW;
   if (g) { g.humans.forEach(function (h) { if (h.st === 'walk') h.y = groundY(h.x); }); }
-  draw(performance.now());
+  draw(performance.now()); placeBomb();
 }
+/* smart-bomb button: fixed, placed at the playfield's bottom-right corner but clamped inside the VISIBLE area
+   (visualViewport = what iOS Safari really shows between its toolbars, minus env(safe-area-inset-*)), never over the HUD */
+function placeBomb() {
+  var b = $('bombBtn'), vv = window.visualViewport, vl = vv ? vv.offsetLeft : 0, vt = vv ? vv.offsetTop : 0, vw = vv ? vv.width : innerWidth, vh = vv ? vv.height : innerHeight;
+  var cs = getComputedStyle($('sai')), sT = parseFloat(cs.paddingTop) || 0, sR = parseFloat(cs.paddingRight) || 0, sB = parseFloat(cs.paddingBottom) || 0, sL = parseFloat(cs.paddingLeft) || 0;
+  var size = Math.round(Math.max(48, Math.min(64, Math.min(vw, vh) * .15))), m = 8; b.style.setProperty('--bs', size + 'px');
+  var c = cv.getBoundingClientRect(), hudB = $('hud').getBoundingClientRect().bottom;
+  var x = Math.min(c.right, vl + vw - sR) - m - size, y = Math.min(c.bottom, vt + vh - sB) - m - size;
+  x = Math.max(vl + sL + m, x); y = Math.max(Math.max(vt + sT, hudB) + m, y);
+  b.style.transform = 'translate(' + Math.round(x) + 'px,' + Math.round(y) + 'px)';
+}
+if (window.visualViewport) { visualViewport.addEventListener('resize', placeBomb); visualViewport.addEventListener('scroll', placeBomb); }
+window.addEventListener('orientationchange', function () { setTimeout(layout, 250); });
 function sx(x) { return dxw(g ? g.camX : 0, x); }   // world -> screen x (may be outside the view)
 function onView(x, m) { var v = sx(x); return v > -(m || 20) && v < LW + (m || 20); }
 var camDemo = 0;
@@ -741,7 +755,7 @@ document.addEventListener('visibilitychange', function () { if (document.hidden 
 var OVS = ['menu', 'rules', 'pause', 'over', 'lb'];
 function show(id) { $(id).hidden = false; } function hide(id) { $(id).hidden = true; }
 function hideAll() { OVS.forEach(hide); }
-function startGame() { audioInit(); sfx('start'); hideAll(); newGame(); running = true; paused = false; lastTs = 0; $('bombBtn').hidden = false; $('hint2').style.opacity = 1; hud(); lbRunStart(g); track('game-start'); }
+function startGame() { audioInit(); sfx('start'); hideAll(); newGame(); running = true; paused = false; lastTs = 0; $('bombBtn').hidden = false; placeBomb(); $('hint2').style.opacity = 1; hud(); lbRunStart(g); track('game-start'); }
 function pauseGame() { paused = true; endTouch(); show('pause'); }
 function resume() { hide('pause'); paused = false; lastTs = 0; }
 function openMenu() { if (running && !paused) { paused = true; } hideAll(); $('mBest').textContent = stats.best ? t('best', { s: fmt(stats.best), w: stats.bestWave }) : t('bestNone'); show('menu'); }
