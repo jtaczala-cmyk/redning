@@ -17,7 +17,7 @@
 <meta property="og:description" content="Redning er et gratis arkadespill: gripere snapper folk fra bakken. Skyt dem, fang menneskene i lufta og sett dem trygt ned – ellers blir de mutanter. Én finger på mobil, tastatur på PC." />
 <meta property="og:url" content="https://stop60.no/redning/" />
 <meta property="og:locale" content="nb_NO" />
-<meta property="og:image" content="https://stop60.no/redning/og-no.jpg?v=1" />
+<meta property="og:image" content="https://stop60.no/redning/og-no.jpg?v=2" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -25,9 +25,9 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Redning – redd menneskene | gratis arkadespill" />
 <meta name="twitter:description" content="Redning er et gratis arkadespill: gripere snapper folk fra bakken. Skyt dem, fang menneskene i lufta og sett dem trygt ned – ellers blir de mutanter. Én finger på mobil, tastatur på PC." />
-<meta name="twitter:image" content="https://stop60.no/redning/og-no.jpg?v=1" />
+<meta name="twitter:image" content="https://stop60.no/redning/og-no.jpg?v=2" />
 <meta name="twitter:image:alt" content="Redning: et romskip skyter mot gripere og mutanter over en neonplanet mens en griper trekker opp et menneske" />
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Redning","url":"https://stop60.no/redning/","description":"Redning er et gratis arkadespill: gripere snapper folk fra bakken. Skyt dem, fang menneskene i lufta og sett dem trygt ned – ellers blir de mutanter. Én finger på mobil, tastatur på PC.","image":"https://stop60.no/redning/og-no.jpg?v=1","inLanguage":["nb","pl","en"],"genre":["Arcade","Shooter","Action"],"gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any (web browser)","playMode":"SinglePlayer","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"NOK","availability":"https://schema.org/InStock"},"publisher":{"@type":"Organization","name":"Stop60","url":"https://stop60.no/"},"copyrightHolder":{"@type":"Organization","name":"Stop60"},"copyrightYear":2026}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Redning","url":"https://stop60.no/redning/","description":"Redning er et gratis arkadespill: gripere snapper folk fra bakken. Skyt dem, fang menneskene i lufta og sett dem trygt ned – ellers blir de mutanter. Én finger på mobil, tastatur på PC.","image":"https://stop60.no/redning/og-no.jpg?v=2","inLanguage":["nb","pl","en"],"genre":["Arcade","Shooter","Action"],"gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any (web browser)","playMode":"SinglePlayer","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"NOK","availability":"https://schema.org/InStock"},"publisher":{"@type":"Organization","name":"Stop60","url":"https://stop60.no/"},"copyrightHolder":{"@type":"Organization","name":"Stop60"},"copyrightYear":2026}</script>
 <meta name="theme-color" content="#12110f" />
 <meta name="color-scheme" content="dark" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -259,6 +259,20 @@ a{color:var(--teal)}
 @media (max-height:700px){#overMark{display:none}#overTxt{display:none}#over .stats{margin-top:4px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+#chef{cursor:pointer;background:rgba(20,6,40,.82)}
+.chefBox{text-align:center;max-width:300px;padding:18px;color:#fff;font-family:Oswald,sans-serif}
+.chefK{color:#facc15;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+.chefT{font-size:19px;line-height:1.25;margin-top:8px}
+.chefSkip{margin-top:14px;background:none;border:1px solid #fff6;color:#fff;border-radius:999px;padding:6px 16px;font:inherit;font-size:13px}
+.glorp{transform-origin:60px 80px;animation:glShake .35s ease-in-out infinite alternate}
+.steam{opacity:0}
+#chef[data-lv="1"] .steam{opacity:0}#chef[data-lv="2"] .steam,#chef[data-lv="3"] .steam,#chef[data-lv="4"] .steam{opacity:1}
+#chef[data-lv="3"] .glorp ellipse,#chef[data-lv="4"] .glorp ellipse{fill:#84cc16}
+#chef[data-lv="4"] .glorp ellipse{fill:#f97316}
+@keyframes glShake{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.glorp{animation:none}}
+#banner small{white-space:normal;width:min(300px,86vw);margin-left:auto;margin-right:auto;line-height:1.35;letter-spacing:.18em}
+
 #cv{background:#05040a;border-radius:14px}
 #pulseBtn{position:fixed;left:0;top:0;z-index:4;width:var(--bs,64px);height:var(--bs,64px);border-radius:50%;background:radial-gradient(circle at 40% 35%,#ff6b75,#c3121e 60%,#7a0a12);border:2px solid #ff9aa1;color:#fff;font:600 11px/1.05 var(--disp);letter-spacing:.08em;box-shadow:0 0 18px rgba(255,60,80,.55);touch-action:none;display:grid;place-items:center}
 #pulseBtn b{display:block;font-size:20px;line-height:1}
@@ -313,6 +327,7 @@ a{color:var(--teal)}
 
 <div class="ov" id="rules" hidden><div class="card rul" id="rulesCard"></div></div>
 
+<div class="ov" id="chef" hidden><div class="chefBox"><svg viewBox="0 0 120 120" width="112" height="112" aria-hidden="true"><g class="glorp"><ellipse cx="60" cy="78" rx="34" ry="28" fill="#a3e635"/><rect x="40" y="22" width="40" height="22" rx="4" fill="#fff"/><circle cx="44" cy="22" r="11" fill="#fff"/><circle cx="60" cy="15" r="13" fill="#fff"/><circle cx="76" cy="22" r="11" fill="#fff"/><circle cx="47" cy="72" r="9" fill="#fff"/><circle cx="73" cy="72" r="9" fill="#fff"/><circle cx="49" cy="74" r="4" fill="#111"/><circle cx="71" cy="74" r="4" fill="#111"/><path class="brow" d="M36 58 L56 66 M84 58 L64 66" stroke="#14532d" stroke-width="5" stroke-linecap="round"/><path d="M48 94 Q60 86 72 94" stroke="#14532d" stroke-width="4" fill="none" stroke-linecap="round"/><path class="steam" d="M30 50 q-6 -8 0 -16 M90 50 q6 -8 0 -16" stroke="#f87171" stroke-width="3" fill="none"/></g></svg><div class="chefK" id="chefK"></div><div class="chefT" id="chefT"></div><button class="chefSkip" type="button" id="chefSkip">Skip ›</button></div></div>
 <div class="ov" id="pause" hidden><div class="card">
   <p class="kk" data-t="paused">Pause</p>
   <button class="btn main" id="pResume" data-t="resume">Fortsett</button>
@@ -365,7 +380,7 @@ function localStorageHas() { try { return !!localStorage.getItem(PREF_KEY); } ca
 function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch (e) {} }
 function rules(o) { return '<p class="kk">Redning</p><h2>' + o.h + '</h2>' + o.s.map(function (s) { return '<h3>' + s[0] + '</h3><ul>' + s[1].map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }).join('') + '<p class="mfoot2">' + o.f + ' <a class="privl" href="personvern/">' + o.pv + '</a> · <a class="licl" href="lisenser/">' + o.li + '</a></p><button class="btn main" id="rClose">' + o.c + '</button>'; }
 var T = {
-  no: { privacy: 'Personvern', privacyMore: 'Les mer om personvern', licences: 'Lisenser', skip: 'Hopp over', introBtn: '▶ Intro', i1: 'En fredelig planet. Alle vinker.', i2: 'Så kom griperne …', i3: '«Bare én tur rundt kvartalet!»', i4: 'Men noen tok imot nødropet.', qrLabel: 'Skann og spill', qrShare: 'Skann og spill – del videre', shareTxt: 'Skann koden med kameraet på telefonen for å åpne spillet.', shareBtn: 'Del …', copy: 'Kopier lenke', tagline: 'Redd menneskene', test: 'TESTVERSJON', score: 'Poeng', wave: 'Bølge', hi: 'Rekord', pulse: 'PULS', saved: 'Reddet',
+  no: { privacy: 'Personvern', privacyMore: 'Les mer om personvern', licences: 'Lisenser', skip: 'Hopp over', introBtn: '▶ Intro', i1: 'Rolig vakt. Eneste pilot drikker kaffe.', i2: 'SIRENE! Romkokker fra planeten Gluttonia!', i3: 'Oppskrift: «Menneske, norsk stil»', i4: 'Ikke på min vakt. Kaffen får vente!', i5: 'Kosmisk Kokkecup? Ikke i dag!', w1: 'Kaffen er fortsatt varm, og her er en invasjon', quips: ['Takk! Sjefen min kommer aldri til å tro hvorfor jeg er sen.', 'Jeg skulle bare kjøpe brød!', 'Norsk stil? Jeg er jo fra Bergen!', 'Neste gang tar jeg bussen.', 'Puh! Jeg var nesten lapskaus.', 'Har du litt mer av den kaffen?', 'Mamma! Jeg fløy!', 'Jeg lukter visst litt dill nå …', 'Takk, helt! Fem stjerner.', 'Kan jeg få en autograf?'], chefK: 'Kosmisk Kokkecup · runde {n}', chef: ['Kokk Glorp: «Hvor er ingrediensene mine?!»', 'Kokk Glorp: «Juryen venter! Hvem tar menneskene mine?»', 'Kokk Glorp: «DEN piloten igjen! Med kaffekoppen!»', 'Kokk Glorp: «ARGH! Dobbelt krydder på neste bølge!»'], overChef: ['Kokk Glorp: «Kveldens middag … pizza. Igjen.»', 'Kokk Glorp: «Kveldens middag … pizza. IGJEN.»', 'Kokk Glorp: «Kveldens middag … frossenpizza. Igjen.»', 'Kokk Glorp: «Kveldens middag … pizza. Igjen. Uten ananas.»'], qrLabel: 'Skann og spill', qrShare: 'Skann og spill – del videre', shareTxt: 'Skann koden med kameraet på telefonen for å åpne spillet.', shareBtn: 'Del …', copy: 'Kopier lenke', tagline: 'Redd menneskene', test: 'TESTVERSJON', score: 'Poeng', wave: 'Bølge', hi: 'Rekord', pulse: 'PULS', saved: 'Reddet',
     newGame: 'Nytt spill', newGameSub: '3 liv · 3 sjokkpulser', howTo: 'Slik spiller du', toMenu: 'Meny', lb: 'Toppliste', share: 'Del spillet', free: 'Laget med lidenskap – gratis for alle',
     paused: 'Pause', resume: 'Fortsett', again: 'Spill igjen', close: 'Lukk', best: 'Rekord: {s} poeng · beste bølge: {w}', bestNone: 'Ingen rekord ennå – lykke til!',
     dragHint: 'Dra fingeren: opp/ned og til siden · skyter mens du holder', waveBanner: 'Bølge {w}', ready: 'Beskytt menneskene!', cleared: 'Bølge {w} klart!', bonus: 'Bonus {h} × {p} = {s}',
@@ -377,14 +392,14 @@ var T = {
     lbQueued: 'Kunne ikke sende nå – prøver igjen senere.', lbRejected: 'Resultatet ble ikke godtatt.', lbRate: 'Litt for raskt – prøv igjen om et øyeblikk.', needOpt: 'Kryss av for topplisten først.', lbNoScore: 'Ingen poeng å sende.',
     nickShort: 'Skriv et kallenavn (2–16 tegn).', nickChars: 'Bare bokstaver, tall, mellomrom og . _ \' -', nickBad: 'Det kallenavnet er ikke tillatt.',
     rulesHtml: rules({ pv: 'Personvern', li: 'Lisenser', h: 'Slik spiller du', c: 'Skjønner', f: 'Laget med lidenskap – gratis for alle. Ingen reklame, ingen konto.', s: [
-      ['Mål', ['Små mennesker står på bakken. Gripere prøver å trekke dem opp med traktorstråle – når en griper når toppen, blir mennesket en mutant.', 'Skyt alle romvesener i bølgen og redd så mange mennesker du kan.']],
+      ['Mål', ['Romkokker fra planeten Gluttonia er med i Kosmisk Kokkecup, og kokeboka deres har oppskriften «Menneske, norsk stil». Du er eneste pilot på vakt – og kaffen var akkurat ferdig.', 'Små mennesker står på bakken. Gripere prøver å trekke dem opp med traktorstråle – når en griper når toppen, blir mennesket en mutant – et ferdigkrydret menneske, grønt og sint.', 'Skyt alle romvesener i bølgen og redd så mange mennesker du kan.']],
       ['Mobil – én finger', ['Legg fingeren hvor som helst på brettet og dra: opp/ned flytter skipet, til siden flyr du den veien. Skipet skyter så lenge fingeren er nede.', 'Rød knapp ✸ = sjokkpuls: ødelegger alle fiender på skjermen.']],
       ['Tastatur', ['Piltaster eller WASD flyr, mellomrom skyter, B sjokkpuls, P pause, M lyd.']],
       ['Redning', ['Skyt en griper som bærer et menneske: mennesket faller. Fang det i lufta (+500) og sett det ned på bakken (+500). Faller det fra lavt, klarer det seg selv (+250).', 'Mister du alle menneskene, eksploderer planeten og alle blir mutanter.']],
       ['Poeng', ['Griper og mutant 150. Bonus etter hver bølge: 100 × bølge (maks 500) per menneske i live.', '3 liv og 3 sjokkpulser. Ekstra liv og puls for hver 7 500 poeng.', 'Radaren øverst viser hele planeten.']],
       ['Toppliste på nett', ['Topplisten på nett er bare for deg som er 16 år eller eldre (18 i India).', 'Frivillig og av til du krysser av selv. Spillet virker fullt ut uten.']],
       ['Blinkende lys', ['Spillet har eksplosjoner og blinkende lys. Har du epilepsi eller er følsom for lysblink, snakk med en lege før du spiller, og ta pause med en gang hvis du blir svimmel eller uvel.']]] }) },
-  pl: { privacy: 'Prywatność', privacyMore: 'Więcej o prywatności', licences: 'Licencje', skip: 'Pomiń', introBtn: '▶ Intro', i1: 'Spokojna planeta. Wszyscy machają.', i2: 'Aż tu nagle chwytacze …', i3: '„Tylko jedna rundka dookoła!”', i4: 'Ale ktoś odebrał wezwanie o pomoc.', qrLabel: 'Zeskanuj i graj', qrShare: 'Zeskanuj i graj – podaj dalej', shareTxt: 'Zeskanuj kod aparatem telefonu, aby otworzyć grę.', shareBtn: 'Udostępnij…', copy: 'Kopiuj link', tagline: 'Ratuj ludzi', test: 'WERSJA TESTOWA', score: 'Punkty', wave: 'Fala', hi: 'Rekord', pulse: 'IMPULS', saved: 'Uratowani',
+  pl: { privacy: 'Prywatność', privacyMore: 'Więcej o prywatności', licences: 'Licencje', skip: 'Pomiń', introBtn: '▶ Intro', i1: 'Spokojny dyżur. Jedyny pilot pije kawę.', i2: 'SYRENA! Kosmiczni kucharze z planety Głodomor!', i3: 'Przepis: „Człowiek po norwesku”', i4: 'Nie na mojej zmianie. Kawa poczeka!', i5: 'Kosmiczny Puchar Kucharzy? Nie dziś!', w1: 'Kawa jeszcze ciepła, a tu inwazja', quips: ['Dzięki! Szef nie uwierzy, czemu się spóźniłem.', 'Wyszedłem tylko po chleb!', 'Po norwesku? Przecież jestem z Radomia!', 'Następnym razem jadę autobusem.', 'Uff! Prawie zostałem gulaszem.', 'Masz jeszcze trochę tej kawy?', 'Mamo! Latałem!', 'Chyba pachnę teraz koperkiem…', 'Dzięki, bohaterze! Pięć gwiazdek.', 'Mogę prosić o autograf?'], chefK: 'Kosmiczny Puchar Kucharzy · runda {n}', chef: ['Szef Glorp: „Gdzie moje składniki?!”', 'Szef Glorp: „Jury czeka! Kto mi zabiera ludzi?”', 'Szef Glorp: „ZNOWU ten pilot! Z kubkiem kawy!”', 'Szef Glorp: „ARGH! Podwójne przyprawy w następnej fali!”'], overChef: ['Szef Glorp: „Dzisiejsza kolacja… pizza. Znowu.”', 'Szef Glorp: „Dzisiejsza kolacja… pizza. ZNOWU.”', 'Szef Glorp: „Dzisiejsza kolacja… mrożona pizza. Znowu.”', 'Szef Glorp: „Dzisiejsza kolacja… pizza. Znowu. Bez ananasa.”'], qrLabel: 'Zeskanuj i graj', qrShare: 'Zeskanuj i graj – podaj dalej', shareTxt: 'Zeskanuj kod aparatem telefonu, aby otworzyć grę.', shareBtn: 'Udostępnij…', copy: 'Kopiuj link', tagline: 'Ratuj ludzi', test: 'WERSJA TESTOWA', score: 'Punkty', wave: 'Fala', hi: 'Rekord', pulse: 'IMPULS', saved: 'Uratowani',
     newGame: 'Nowa gra', newGameSub: '3 życia · 3 impulsy', howTo: 'Jak grać', toMenu: 'Menu', lb: 'Ranking', share: 'Udostępnij grę', free: 'Stworzone z pasji – za darmo dla wszystkich',
     paused: 'Pauza', resume: 'Graj dalej', again: 'Zagraj ponownie', close: 'Zamknij', best: 'Rekord: {s} pkt · najlepsza fala: {w}', bestNone: 'Jeszcze bez rekordu – powodzenia!',
     dragHint: 'Przesuwaj palcem: góra/dół i w bok · strzela, gdy trzymasz', waveBanner: 'Fala {w}', ready: 'Chroń ludzi!', cleared: 'Fala {w} zaliczona!', bonus: 'Bonus {h} × {p} = {s}',
@@ -396,14 +411,14 @@ var T = {
     lbQueued: 'Nie udało się wysłać – spróbujemy później.', lbRejected: 'Wynik nie został przyjęty.', lbRate: 'Za szybko – spróbuj za chwilę.', needOpt: 'Najpierw zaznacz pole rankingu.', lbNoScore: 'Brak punktów do wysłania.',
     nickShort: 'Wpisz nick (2–16 znaków).', nickChars: 'Tylko litery, cyfry, spacja i . _ \' -', nickBad: 'Ten nick jest niedozwolony.',
     rulesHtml: rules({ pv: 'Prywatność', li: 'Licencje', h: 'Jak grać', c: 'Rozumiem', f: 'Stworzone z pasji – za darmo dla wszystkich. Bez reklam, bez konta.', s: [
-      ['Cel', ['Na ziemi stoją mali ludzie. Chwytacze próbują wciągnąć ich promieniem – gdy chwytacz dotrze na górę, człowiek zmienia się w mutanta.', 'Zestrzel wszystkich kosmitów w fali i uratuj jak najwięcej ludzi.']],
+      ['Cel', ['Kosmiczni kucharze z planety Głodomor startują w Kosmicznym Pucharze Kucharzy, a w ich książce kucharskiej jest przepis „Człowiek po norwesku”. Jesteś jedynym pilotem na dyżurze – i właśnie zaparzyłeś kawę.', 'Na ziemi stoją mali ludzie. Chwytacze próbują wciągnąć ich promieniem – gdy chwytacz dotrze na górę, człowiek zmienia się w mutanta – już przyprawionego, zielonego i złego.', 'Zestrzel wszystkich kosmitów w fali i uratuj jak najwięcej ludzi.']],
       ['Telefon – jeden palec', ['Połóż palec w dowolnym miejscu planszy i przesuwaj: góra/dół rusza statkiem, w bok – lecisz w tę stronę. Statek strzela, dopóki trzymasz palec.', 'Czerwony przycisk ✸ = impuls uderzeniowy: niszczy wszystkich wrogów na ekranie.']],
       ['Klawiatura', ['Strzałki lub WASD – lot, spacja – strzał, B – impuls, P – pauza, M – dźwięk.']],
       ['Ratunek', ['Zestrzel chwytacza niosącego człowieka: człowiek spada. Złap go w locie (+500) i odstaw na ziemię (+500). Z niska spadnie bezpiecznie sam (+250).', 'Jeśli stracisz wszystkich ludzi, planeta wybucha i wszyscy stają się mutantami.']],
       ['Punkty', ['Chwytacz i mutant 150. Bonus po każdej fali: 100 × fala (maks. 500) za każdego żywego człowieka.', '3 życia i 3 impulsy. Dodatkowe życie i impuls co 7 500 punktów.', 'Radar u góry pokazuje całą planetę.']],
       ['Ranking online', ['Ranking online jest tylko dla osób, które mają co najmniej 16 lat (w Indiach 18).', 'Dobrowolny i wyłączony, dopóki sam go nie zaznaczysz. Gra działa w pełni bez niego.']],
       ['Migające światła', ['Gra zawiera eksplozje i migające światła. Jeśli masz padaczkę lub jesteś wrażliwy na błyski, porozmawiaj z lekarzem przed grą i od razu zrób przerwę, jeśli poczujesz zawroty głowy lub się źle poczujesz.']]] }) },
-  en: { privacy: 'Privacy', privacyMore: 'More about privacy', licences: 'Licences', skip: 'Skip', introBtn: '▶ Intro', i1: 'A peaceful planet. Everyone waves.', i2: 'Then the grabbers came …', i3: '“Just one quick spin around the block!”', i4: 'But someone answered the distress call.', qrLabel: 'Scan & play', qrShare: 'Scan & play – pass it on', shareTxt: 'Scan the code with your phone camera to open the game.', shareBtn: 'Share…', copy: 'Copy link', tagline: 'Save the humans', test: 'TEST VERSION', score: 'Score', wave: 'Wave', hi: 'Best', pulse: 'PULSE', saved: 'Saved',
+  en: { privacy: 'Privacy', privacyMore: 'More about privacy', licences: 'Licences', skip: 'Skip', introBtn: '▶ Intro', i1: 'A quiet shift. The only pilot sips coffee.', i2: 'SIREN! Space chefs from planet Gluttonia!', i3: 'Recipe: “Human, Norwegian style”', i4: 'Not on my watch. The coffee can wait!', i5: 'Cosmic Chef Cup? Not today!', w1: 'Coffee still warm, and here’s an invasion', quips: ['Thanks! My boss won’t believe why I’m late.', 'I only popped out for bread!', 'Norwegian style? I’m from Leeds!', 'Next time I’m taking the bus.', 'Phew! I was nearly a stew.', 'Got any more of that coffee?', 'Mum! I flew!', 'I think I smell of dill now…', 'Thanks, hero! Five stars.', 'Can I get an autograph?'], chefK: 'Cosmic Chef Cup · round {n}', chef: ['Chef Glorp: “Where are my ingredients?!”', 'Chef Glorp: “The judges are waiting! Who keeps taking my humans?”', 'Chef Glorp: “THAT pilot again! With the coffee mug!”', 'Chef Glorp: “ARGH! Double seasoning on the next wave!”'], overChef: ['Chef Glorp: “Tonight’s dinner… pizza. Again.”', 'Chef Glorp: “Tonight’s dinner… pizza. AGAIN.”', 'Chef Glorp: “Tonight’s dinner… frozen pizza. Again.”', 'Chef Glorp: “Tonight’s dinner… pizza. Again. No pineapple.”'], qrLabel: 'Scan & play', qrShare: 'Scan & play – pass it on', shareTxt: 'Scan the code with your phone camera to open the game.', shareBtn: 'Share…', copy: 'Copy link', tagline: 'Save the humans', test: 'TEST VERSION', score: 'Score', wave: 'Wave', hi: 'Best', pulse: 'PULSE', saved: 'Saved',
     newGame: 'New game', newGameSub: '3 lives · 3 shock pulses', howTo: 'How to play', toMenu: 'Menu', lb: 'Leaderboard', share: 'Share the game', free: 'Made with passion – free for everyone',
     paused: 'Paused', resume: 'Resume', again: 'Play again', close: 'Close', best: 'Best: {s} points · best wave: {w}', bestNone: 'No best score yet – good luck!',
     dragHint: 'Drag your finger: up/down and sideways · fires while you hold', waveBanner: 'Wave {w}', ready: 'Protect the humans!', cleared: 'Wave {w} cleared!', bonus: 'Bonus {h} × {p} = {s}',
@@ -415,7 +430,7 @@ var T = {
     lbQueued: 'Couldn’t send now – will retry later.', lbRejected: 'The score was not accepted.', lbRate: 'A bit too fast – try again in a moment.', needOpt: 'Tick the leaderboard box first.', lbNoScore: 'No points to post.',
     nickShort: 'Enter a nickname (2–16 characters).', nickChars: 'Only letters, digits, spaces and . _ \' -', nickBad: 'That nickname isn’t allowed.',
     rulesHtml: rules({ pv: 'Privacy', li: 'Licences', h: 'How to play', c: 'Got it', f: 'Made with passion – free for everyone. No ads, no account.', s: [
-      ['Goal', ['Little humans stand on the ground. Grabbers try to pull them up with a tractor beam – when a grabber reaches the top, the human becomes a mutant.', 'Shoot every alien in the wave and save as many humans as you can.']],
+      ['Goal', ['Space chefs from planet Gluttonia are competing in the Cosmic Chef Cup, and their cookbook has a recipe called “Human, Norwegian style”. You are the only pilot on duty – and your coffee was just ready.', 'Little humans stand on the ground. Grabbers try to pull them up with a tractor beam – when a grabber reaches the top, the human becomes a mutant – a pre-seasoned human, green and grumpy.', 'Shoot every alien in the wave and save as many humans as you can.']],
       ['Phone – one finger', ['Put your finger anywhere on the playfield and drag: up/down moves the ship, sideways flies that way. The ship fires while your finger is down.', 'Red button ✸ = shock pulse: destroys every enemy on screen.']],
       ['Keyboard', ['Arrow keys or WASD fly, Space fires, B shock pulse, P pause, M sound.']],
       ['Rescue', ['Shoot a grabber carrying a human: the human falls. Catch them in mid-air (+500) and set them down on the ground (+500). From low down they land safely on their own (+250).', 'Lose every human and the planet explodes – everyone turns mutant.']],
@@ -423,6 +438,8 @@ var T = {
       ['Online leaderboard', ['The online leaderboard is only for players aged 16 or over (18 or over in India).', 'Optional and off until you tick it yourself. The game works fully without it.']],
       ['Flashing lights', ['The game has explosions and flashing lights. If you have epilepsy or are sensitive to flashing light, talk to a doctor before playing, and take a break straight away if you feel dizzy or unwell.']]] }) }
 };
+function tl(k) { var a = (T[prefs.lang] || T.no)[k]; return Array.isArray(a) ? a : T.en[k]; }
+function pick(k) { var a = tl(k); return a[Math.floor(Math.random() * a.length)]; }
 function t(k, o) { var s = (T[prefs.lang] || T.no)[k]; if (s == null) s = T.en[k] || k; if (o) s = s.replace(/\{(\w+)\}/g, function (m, n) { return o[n] != null ? o[n] : m; }); return s; }
 function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, prefs.lang === 'en' ? ',' : '\u00a0'); }
 function gameBase() { return location.pathname.replace(/index\.html$/, '').replace(/(pl|en)\/$/, ''); }
@@ -459,10 +476,12 @@ function newGame() {
   startWave();
 }
 function addHuman(x) { g.humans.push({ x: wrap(x), y: groundY(x), vy: 0, st: 'walk', dir: rng() < .5 ? -1 : 1, ph: rng() * 6, by: null, fallFrom: 0, wave: 0 }); }
+function say(h) { h.say = pick('quips'); h.sayT = g.t; }   // rescued human: short funny line on landing (visual only)
 function startWave() {
   g.wave++; g.waveKills = 0; g.spawnLeft = E(g.wave); g.spawnT = 1.2; g.state = 'play'; g.stateT = 0;
   if (g.humans.length === 0 && g.wave % 4 === 1) { for (var i = 0; i < 10; i++) addHuman(i * WW / 10 + rng() * 150); g.planetLost = false; toast(t('planetBack')); }
-  banner(t('waveBanner', { w: g.wave }), t('ready'), 1.8); hud();
+  var bn = function () { banner(t('waveBanner', { w: g.wave }), g.wave === 1 ? t('w1') : t('ready'), g.wave === 1 ? 2.6 : 1.8); };
+  if (g.wave > 1 && g.wave % 5 === 1 && typeof chefCut === 'function') chefCut(Math.floor(g.wave / 5), bn); else bn(); hud();
 }
 function spawnAlien(kind, x, y) { var a = { k: kind, x: wrap(x), y: y, vx: (rng() < .5 ? -1 : 1) * (28 + rng() * 22 + g.wave * 2), vy: 0, st: 'warp', stT: .8, tgt: null, fireT: 1.5 + rng() * 2.5, ph: rng() * 6, hum: null };
   g.aliens.push(a); burst(x, y, 18, '#ffe066', 70, .6, true); return a; }
@@ -507,7 +526,7 @@ function step(dt) {
     if ((input.fire || input.touch) && s.fireT <= 0 && g.state !== 'over') { s.fireT = .13;
       g.lastMuzzle = { dx: 16 * SHIP_S * s.face, dy: 1 * SHIP_S }; g.shots.push({ x: wrap(s.x + s.face * 16 * SHIP_S), y: s.y + 1 * SHIP_S, d: s.face, len: 8, life: .42 }); sfx('shoot'); }
     if (Math.abs(s.vx) > 30 || ix) trail(s);
-    if (s.carry) { var c = s.carry; c.x = s.x; c.y = s.y + 14 * SHIP_S; if (c.y >= groundY(c.x) - 2) { c.st = 'walk'; c.y = groundY(c.x); s.carry = null; if (!c.np) { g.saved++; addScore(500, c.x, c.y - 20, t('landed')); } c.np = false; sfx('save'); burst(c.x, c.y, 16, '#a3e635', 80, .6); } }
+    if (s.carry) { var c = s.carry; c.x = s.x; c.y = s.y + 14 * SHIP_S; if (c.y >= groundY(c.x) - 2) { c.st = 'walk'; c.y = groundY(c.x); s.carry = null; if (!c.np) { g.saved++; addScore(500, c.x, c.y - 20, t('landed')); say(c); } c.np = false; sfx('save'); burst(c.x, c.y, 16, '#a3e635', 80, .6); } }
   }
   g.camX = wrap(s.x - s.off);
   // ---- shots
@@ -557,7 +576,7 @@ function step(dt) {
       if (!s.dead && !s.carry && Math.abs(dxw(s.x, h.x)) < 16 * SHIP_S && Math.abs(s.y + 8 * SHIP_S - h.y) < 16 * SHIP_S) { h.st = 'caught'; s.carry = h; h.claimed = null; if (!h.np) addScore(500, h.x, h.y - 16, t('caught')); sfx('catch'); }
       else if (h.y >= groundY(h.x)) { h.y = groundY(h.x); h.claimed = null;
         if (h.y - h.fallFrom > 150) { g.humans.splice(i, 1); burst(h.x, h.y, 20, '#fb923c', 90, .7); sfx('splat'); checkPlanet(); }
-        else { h.st = 'walk'; if (!h.np) { g.saved++; addScore(250, h.x, h.y - 18, t('safe')); } h.np = false; } } }
+        else { h.st = 'walk'; if (!h.np) { g.saved++; addScore(250, h.x, h.y - 18, t('safe')); say(h); } h.np = false; } } }
   }
   // ---- wave end
   if (g.state === 'play' && g.spawnLeft === 0 && g.aliens.length === 0 && g.waveKills >= E(g.wave)) {
@@ -640,6 +659,8 @@ function draw(now) {
   g.humans.forEach(function (h) { if (onView(h.x)) drawHuman(sx(h.x), h.y, h, tt); });
   // aliens
   g.aliens.forEach(function (a) { if (onView(a.x)) drawAlien(sx(a.x), a.y, a, tt); });
+  // speech bubbles of rescued humans
+  g.humans.forEach(function (h) { if (h.say && g.t - h.sayT < 2.8 && onView(h.x, 80)) drawSay(sx(h.x), h.y - 32, h.say, g.t - h.sayT); else if (h.say && g.t - h.sayT >= 2.8) h.say = null; });
   // particles
   ctx.globalCompositeOperation = 'lighter';
   for (i = 0; i < PN; i++) { var p = P[i]; if (p.l <= 0) continue; var px = sx(p.x); if (px < -10 || px > LW + 10) continue; var k = p.l / p.m; ctx.globalAlpha = k; ctx.fillStyle = p.c; ctx.fillRect(px - p.s / 2, p.y - p.s / 2, p.s, p.s); }
@@ -681,10 +702,13 @@ function drawAlien(x, y, a, tt) {
     ctx.fillStyle = '#facc15'; ctx.beginPath(); ctx.ellipse(0, -6, 4, 3.4, 0, Math.PI, 0); ctx.fill(); ctx.shadowBlur = 0;
     ctx.strokeStyle = '#d9f99d'; ctx.lineWidth = 1.4; var lg = Math.sin(a.ph * 6) * 1.5; ctx.beginPath(); ctx.moveTo(-6, 2); ctx.lineTo(-9, 8 + lg); ctx.moveTo(6, 2); ctx.lineTo(9, 8 - lg); ctx.moveTo(0, 2); ctx.lineTo(0, 7); ctx.stroke();
     for (var i = 0; i < 3; i++) { ctx.fillStyle = (Math.floor(tt * 6) + i) % 3 ? '#14532d' : '#fff'; ctx.fillRect(-5 + i * 4, -2, 2, 2); }
+    ctx.fillStyle = '#fff'; ctx.fillRect(-3.4, -12.6, 6.8, 3.4); ctx.beginPath(); ctx.arc(-2.6, -13.4, 2.4, 0, 7); ctx.arc(0, -14.8, 2.8, 0, 7); ctx.arc(2.6, -13.4, 2.4, 0, 7); ctx.fill();   // chef's hat
   } else {
-    var j = Math.sin(a.ph * 20) * .8; ctx.shadowColor = '#ff4dd2'; ctx.shadowBlur = 10; ctx.fillStyle = '#ff4dd2';
+    var j = Math.sin(a.ph * 20) * .8; ctx.shadowColor = '#4ade80'; ctx.shadowBlur = 10; ctx.fillStyle = '#22c55e';   // mutant = a pre-seasoned human: green and grumpy
     ctx.beginPath(); for (i = 0; i < 8; i++) { var an = i / 8 * 6.283 + a.ph * 3, r = i % 2 ? 4 : 8 + j; ctx.lineTo(Math.cos(an) * r, Math.sin(an) * r); } ctx.closePath(); ctx.fill();
-    ctx.shadowBlur = 0; ctx.fillStyle = '#fff'; ctx.fillRect(-3, -2, 2, 2); ctx.fillRect(1, -2, 2, 2); ctx.fillStyle = '#3b0030'; ctx.fillRect(-2, 2, 4, 1.2);
+    ctx.shadowBlur = 0; ctx.fillStyle = '#fff'; ctx.fillRect(-3, -2, 2, 2); ctx.fillRect(1, -2, 2, 2); ctx.fillStyle = '#052e16'; ctx.fillRect(-2, 2, 4, 1.2);
+    ctx.strokeStyle = '#052e16'; ctx.lineWidth = 1.1; ctx.beginPath(); ctx.moveTo(-4, -4.6); ctx.lineTo(-1, -3.2); ctx.moveTo(4, -4.6); ctx.lineTo(1, -3.2); ctx.stroke();   // angry brows
+    ctx.fillStyle = '#fef3c7'; ctx.fillRect(-5.5, -6.5, .9, .9); ctx.fillRect(4.6, 1.5, .9, .9); ctx.fillRect(-1, -7.2, .8, .8);   // seasoning flakes
   }
   ctx.restore();
 }
@@ -694,6 +718,13 @@ function drawBeam(x, y0, y1, tt) {
   ctx.strokeStyle = 'rgba(255,255,200,.55)'; ctx.lineWidth = 1;
   for (var i = 0; i < 4; i++) { var k = ((tt * 1.6 + i / 4) % 1), yy = y1 - (y1 - y0) * k, w = 4 + 9 * (1 - k); ctx.beginPath(); ctx.moveTo(x - w, yy); ctx.lineTo(x + w, yy); ctx.stroke(); }
 }
+function drawSay(x, y, txt, age) {
+  ctx.save(); ctx.font = '500 8.5px "IBM Plex Sans", sans-serif'; var words = txt.split(' '), lines = [], cur = '';
+  words.forEach(function (w) { var tst = cur ? cur + ' ' + w : w; if (ctx.measureText(tst).width > 118 && cur) { lines.push(cur); cur = w; } else cur = tst; }); if (cur) lines.push(cur);
+  var w = 0; lines.forEach(function (l) { w = Math.max(w, ctx.measureText(l).width); }); w += 12; var h = lines.length * 10.5 + 7, bx = Math.max(4, Math.min(LW - w - 4, x - w / 2)), by = y - h - 6;
+  ctx.globalAlpha = Math.min(1, age * 6, (2.8 - age) * 3); ctx.fillStyle = '#fff'; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(bx, by, w, h, 6); else ctx.rect(bx, by, w, h); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(Math.max(bx + 6, Math.min(bx + w - 6, x - 3)), by + h - .5); ctx.lineTo(x, y - 2); ctx.lineTo(Math.max(bx + 10, Math.min(bx + w - 2, x + 4)), by + h - .5); ctx.fill();
+  ctx.fillStyle = '#4c1d95'; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; lines.forEach(function (l, i) { ctx.fillText(l, bx + w / 2, by + 4 + i * 10.5); }); ctx.restore(); }
 function drawHuman(x, y, h, tt) {
   ctx.save(); ctx.translate(x, y); ctx.strokeStyle = '#fde2e2'; ctx.fillStyle = '#fde2e2'; ctx.lineWidth = 1.6; ctx.lineCap = 'round';
   var panic = h.st !== 'walk', wave = panic ? Math.sin(tt * 18 + h.ph) : Math.sin(tt * 3 + h.ph);
@@ -768,7 +799,8 @@ var lastTs = 0, acc = 0, vtManual = false;
 function frame(now) {
   if (!vtManual) requestAnimationFrame(frame);
   var dt = Math.min(.05, (now - (lastTs || now)) / 1000); lastTs = now;
-  if (running && !paused) { if (hitStop > 0) hitStop -= dt; else { acc += dt; while (acc >= 1 / 120) { step(1 / 120); acc -= 1 / 120; if (!running) break; } } }
+  if (cut && !paused) { cutT -= dt; if (cutT <= 0) endCut(); }
+  if (running && !paused && !cut) { if (hitStop > 0) hitStop -= dt; else { acc += dt; while (acc >= 1 / 120) { step(1 / 120); acc -= 1 / 120; if (!running) break; } } }
   if (intro && !paused) introStep(dt);
   if (!paused) fx(dt);
   if (window.__bot && g && running) botStep();
@@ -804,10 +836,19 @@ var OVS = ['menu', 'rules', 'pause', 'over', 'lb', 'share'];
 function show(id) { $(id).hidden = false; } function hide(id) { $(id).hidden = true; }
 function hideAll() { OVS.forEach(hide); }
 function startGame() { audioInit(); sfx('start'); hideAll(); newGame(); running = true; paused = false; lastTs = 0; $('pulseBtn').hidden = false; placePulse(); $('hint2').style.opacity = 1; hud(); lbRunStart(g); track('game-start'); }
+// Chef Glorp cutscene every 5 waves (story only; gameplay is frozen while it shows)
+var cut = false, cutT = 0, cutDone = null;
+function chefCut(n, done) {
+  if (DEBUG && !/[?&]cut=1/.test(location.search)) { done(); return; }
+  var a = tl('chef'); $('chefK').textContent = t('chefK', { n: n + 1 }); $('chefT').textContent = a[Math.min(a.length - 1, n - 1)];
+  $('chef').setAttribute('data-lv', Math.min(4, n)); $('chefSkip').textContent = t('skip') + ' ›'; cut = true; cutT = 3.6; cutDone = done; endTouch(); show('chef'); }
+function endCut() { if (!cut) return; cut = false; hide('chef'); lastTs = 0; var d = cutDone; cutDone = null; if (d) d(); }
+$('chef').addEventListener('click', endCut);
+document.addEventListener('keydown', function (e) { if (cut && !paused && /^(Escape|Enter|NumpadEnter|Space)$/.test(e.code)) { e.preventDefault(); e.stopImmediatePropagation(); endCut(); } }, true);
 function pauseGame() { paused = true; endTouch(); show('pause'); }
 function resume() { hide('pause'); paused = false; lastTs = 0; }
 function openMenu() { if (running && !paused) { paused = true; } hideAll(); $('mBest').textContent = stats.best ? t('best', { s: fmt(stats.best), w: stats.bestWave }) : t('bestNone'); show('menu'); }
-function openOver(gg, nb) { endTouch(); $('pulseBtn').hidden = true; $('overTitle').textContent = t('overTitle'); $('overTxt').textContent = t('overTxt');
+function openOver(gg, nb) { endTouch(); $('pulseBtn').hidden = true; $('overTitle').textContent = t('overTitle'); $('overTxt').textContent = pick('overChef');
   $('osScore').textContent = fmt(gg.score); $('osWave').textContent = gg.wave; $('osSaved').textContent = gg.saved; $('overBest').textContent = nb ? t('newBest', { s: fmt(gg.score) }) : t('bestIs', { s: fmt(stats.best) });
   hideAll(); show('over'); onlineOver(gg); }
 $('mNew').onclick = function () { running = false; startGame(); };
@@ -838,15 +879,7 @@ $('sCopy').onclick = function () { var u = gameURL(); (navigator.clipboard ? nav
 var gcOn = LAUNCH && !DEBUG;
 if (gcOn) { window.goatcounter = { path: gameBase() + (LANGDIR ? LANGDIR + '/' : '') }; var gs = document.createElement('script'); gs.async = true; gs.src = gameBase() + 'count.js';
   gs.setAttribute('data-goatcounter', 'https://jtaczala-games.goatcounter.com/count'); document.head.appendChild(gs); }
-/* Play time (anonymous): 'redning-time-<bucket>' sent once per game, on game over or when the page is left. Nothing stored. */
-var gcT0 = 0;
-function gcBucket() { var m = (Date.now() - gcT0) / 60000; gcT0 = 0; return 'time-' + (m < 1 ? '0-1m' : m < 3 ? '1-3m' : m < 5 ? '3-5m' : m < 10 ? '5-10m' : m < 20 ? '10-20m' : '20m+'); }
-function gcLeave() { if (!gcT0) return; var n = gcBucket(); if (DEBUG) (window.__gcLog = window.__gcLog || []).push(n); if (!gcOn) return;
-  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'redning-' + n, title: 'redning ' + n, event: true }); } catch (e) {} }
-document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') gcLeave(); });
-window.addEventListener('pagehide', gcLeave);
-function track(n) { if (n === 'game-start') gcT0 = Date.now(); else if (n === 'game-finish' && gcT0) track(gcBucket());
-  if (DEBUG) (window.__gcLog = window.__gcLog || []).push(n); if (!gcOn) return;
+function track(n) { if (DEBUG) (window.__gcLog = window.__gcLog || []).push(n); if (!gcOn) return;
   setTimeout(function () { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'redning-' + n, title: 'redning ' + n, event: true }); } catch (e) {} }, 300); }
 /* ---------------- animated intro (canvas, game art): first visit only, replay from the menu ---------------- */
 var tr = function (k, o) { return t(k, o); };
@@ -907,10 +940,10 @@ function drawIntro(tt) {
   // captions (page language) and the title card
   var cap = t < 3 ? 'i1' : t < 6 ? 'i2' : t < 8.6 ? 'i3' : t < 11.2 ? 'i4' : null;
   if (cap) { var ct = t < 3 ? t : t < 6 ? t - 3 : t < 8.6 ? t - 6 : t - 8.6, a = Math.min(1, ct * 3); ctx.globalAlpha = a; ctx.textAlign = 'center'; ctx.font = '600 15px Oswald, sans-serif';
-    var txt = tr(cap), y = RADAR + 100; if (ctx.measureText(txt).width > LW - 30) ctx.font = '600 12.5px Oswald, sans-serif'; ctx.fillStyle = 'rgba(5,4,10,.6)'; var w = ctx.measureText(txt).width + 20; ctx.fillRect(LW / 2 - w / 2, y - 16, w, 24); ctx.fillStyle = cap === 'i3' ? '#facc15' : '#f5f1e8'; ctx.fillText(txt, LW / 2, y); ctx.globalAlpha = 1; }
+    var txt = tr(cap), y = RADAR + 100; for (var fs = 15; ctx.measureText(txt).width > LW - 30 && fs > 9; fs -= .5) ctx.font = '600 ' + fs + 'px Oswald, sans-serif'; ctx.fillStyle = 'rgba(5,4,10,.6)'; var w = ctx.measureText(txt).width + 20; ctx.fillRect(LW / 2 - w / 2, y - 16, w, 24); ctx.fillStyle = cap === 'i3' ? '#facc15' : '#f5f1e8'; ctx.fillText(txt, LW / 2, y); ctx.globalAlpha = 1; }
   if (t > 11.2) { var k = Math.min(1, (t - 11.2) / .5), s = I.rm ? 1 : 1 + .3 * (1 - k); ctx.save(); ctx.translate(LW / 2, LH * .4); ctx.scale(s, s); ctx.globalAlpha = k; ctx.textAlign = 'center';
     ctx.font = '600 52px Oswald, sans-serif'; ctx.shadowColor = '#2dd4bf'; ctx.shadowBlur = 18; ctx.fillStyle = '#fff'; ctx.fillText('REDNING', 0, 0); ctx.shadowColor = '#e11d2a'; ctx.shadowBlur = 30; ctx.fillText('REDNING', 0, 0);
-    ctx.shadowBlur = 0; ctx.font = '500 12px Oswald, sans-serif'; ctx.fillStyle = '#99f6e4'; ctx.fillText(tr('tagline').toUpperCase().split('').join(' '), 0, 24); ctx.restore(); ctx.globalAlpha = 1; }
+    ctx.shadowBlur = 0; ctx.font = '500 12px Oswald, sans-serif'; ctx.fillStyle = '#99f6e4'; ctx.fillText(tr('tagline').toUpperCase().split('').join(' '), 0, 24); if (t > 11.8) { ctx.globalAlpha = Math.min(1, (t - 11.8) * 3); ctx.font = '600 13px Oswald, sans-serif'; ctx.fillStyle = '#facc15'; ctx.fillText(tr('i5'), 0, 50); } ctx.restore(); ctx.globalAlpha = 1; }
 }
 /* ---------------- online leaderboard (opt-in): Supabase public.scores, game = 'redning', only via the checked RPC redning_submit (supabase/supabase_redning.sql) ---------------- */
 var LB_URL = 'https://oqvqvpvlmmyxivqpaifl.supabase.co', LB_KEY = 'sb_publishable_qnC7OiwBa1HV7H9oBk4I9A_KUUHTOFG'; // publishable key: public by design (security = RLS + checks in the database)
