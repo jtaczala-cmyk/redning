@@ -392,6 +392,7 @@ function applyLang() {
 }
 /* ---------------- engine ---------------- */
 var WW = 3000, LW = 300, LH = 600, RADAR = 46, GY = 560;          // world width (wraps), logical view, radar strip, ground base
+var SHIP_S = 1.25;                                                   // player ship scale (drawing, hitbox, muzzle)
 var E = function (w) { return Math.min(5 + 2 * w, 25); };           // landers per wave (same formula as redning_submit)
 function wrap(x) { return ((x % WW) + WW) % WW; }
 function dxw(a, b) { var d = wrap(b - a); return d > WW / 2 ? d - WW : d; }   // shortest signed distance a -> b
@@ -454,14 +455,14 @@ function step(dt) {
     var acc = 520, maxv = 250;
     s.vx += (ix ? ix * acc : -Math.sign(s.vx) * Math.min(Math.abs(s.vx), 300 * dt) / dt) * dt;
     s.vx = Math.max(-maxv, Math.min(maxv, s.vx));
-    s.y += iy * 230 * dt; s.y = Math.max(RADAR + 26, Math.min(groundY(s.x) - 12, s.y));
+    s.y += iy * 230 * dt; s.y = Math.max(RADAR + 26, Math.min(groundY(s.x) - 12 * SHIP_S, s.y));
     s.x = wrap(s.x + s.vx * dt);
     var want = s.face > 0 ? LW * .28 : LW * .72; s.off += (want - s.off) * Math.min(1, dt * 2.2);
     s.fireT -= dt;
     if ((input.fire || input.touch) && s.fireT <= 0 && g.state !== 'over') { s.fireT = .13;
-      g.shots.push({ x: wrap(s.x + s.face * 14), y: s.y + 1, d: s.face, len: 8, life: .42 }); sfx('shoot'); }
+      g.lastMuzzle = { dx: 16 * SHIP_S * s.face, dy: 1 * SHIP_S }; g.shots.push({ x: wrap(s.x + s.face * 16 * SHIP_S), y: s.y + 1 * SHIP_S, d: s.face, len: 8, life: .42 }); sfx('shoot'); }
     if (Math.abs(s.vx) > 30 || ix) trail(s);
-    if (s.carry) { var c = s.carry; c.x = s.x; c.y = s.y + 14; if (c.y >= groundY(c.x) - 2) { c.st = 'walk'; c.y = groundY(c.x); s.carry = null; if (!c.np) { g.saved++; addScore(500, c.x, c.y - 20, t('landed')); } c.np = false; sfx('save'); burst(c.x, c.y, 16, '#a3e635', 80, .6); } }
+    if (s.carry) { var c = s.carry; c.x = s.x; c.y = s.y + 14 * SHIP_S; if (c.y >= groundY(c.x) - 2) { c.st = 'walk'; c.y = groundY(c.x); s.carry = null; if (!c.np) { g.saved++; addScore(500, c.x, c.y - 20, t('landed')); } c.np = false; sfx('save'); burst(c.x, c.y, 16, '#a3e635', 80, .6); } }
   }
   g.camX = wrap(s.x - s.off);
   // ---- shots
@@ -498,17 +499,17 @@ function step(dt) {
     var onS = dxw(g.camX, a.x); a.fireT -= dt;
     if (a.fireT <= 0 && onS > 0 && onS < LW && !s.dead && a.st !== 'beam') { a.fireT = (a.k === 'mut' ? 1.4 : 2.6) / spd + rng() * 1.5;
       var bx = dxw(a.x, s.x), by = s.y - a.y, bl = Math.hypot(bx, by) || 1, bv = 95 + g.wave * 6; g.bullets.push({ x: a.x, y: a.y, vx: bx / bl * bv + s.vx * .3, vy: by / bl * bv, life: 4 }); sfx('ebullet'); }
-    if (!s.dead && s.inv <= 0 && Math.abs(dxw(s.x, a.x)) < 14 && Math.abs(s.y - a.y) < 11) { killAlien(a, 'ram'); shipDie(); }
+    if (!s.dead && s.inv <= 0 && Math.abs(dxw(s.x, a.x)) < 14 * SHIP_S && Math.abs(s.y - a.y) < 11 * SHIP_S) { killAlien(a, 'ram'); shipDie(); }
   }
   // ---- enemy bullets
   for (i = g.bullets.length - 1; i >= 0; i--) { var b = g.bullets[i]; b.life -= dt; b.x = wrap(b.x + b.vx * dt); b.y += b.vy * dt;
-    if (!s.dead && s.inv <= 0 && Math.abs(dxw(s.x, b.x)) < 9 && Math.abs(s.y - b.y) < 6) { g.bullets.splice(i, 1); shipDie(); continue; }
+    if (!s.dead && s.inv <= 0 && Math.abs(dxw(s.x, b.x)) < 9 * SHIP_S && Math.abs(s.y - b.y) < 6 * SHIP_S) { g.bullets.splice(i, 1); shipDie(); continue; }
     if (b.life <= 0 || b.y > GY || b.y < RADAR) g.bullets.splice(i, 1); }
   // ---- humans
   for (i = g.humans.length - 1; i >= 0; i--) { h = g.humans[i]; h.ph += dt;
     if (h.st === 'walk') { if (rng() < dt * .3) h.dir = -h.dir; h.x = wrap(h.x + h.dir * 6 * dt); h.y = groundY(h.x); }
     else if (h.st === 'fall') { h.vy += 70 * dt; h.y += h.vy * dt;
-      if (!s.dead && !s.carry && Math.abs(dxw(s.x, h.x)) < 16 && Math.abs(s.y + 8 - h.y) < 16) { h.st = 'caught'; s.carry = h; h.claimed = null; if (!h.np) addScore(500, h.x, h.y - 16, t('caught')); sfx('catch'); }
+      if (!s.dead && !s.carry && Math.abs(dxw(s.x, h.x)) < 16 * SHIP_S && Math.abs(s.y + 8 * SHIP_S - h.y) < 16 * SHIP_S) { h.st = 'caught'; s.carry = h; h.claimed = null; if (!h.np) addScore(500, h.x, h.y - 16, t('caught')); sfx('catch'); }
       else if (h.y >= groundY(h.x)) { h.y = groundY(h.x); h.claimed = null;
         if (h.y - h.fallFrom > 150) { g.humans.splice(i, 1); burst(h.x, h.y, 20, '#fb923c', 90, .7); sfx('splat'); checkPlanet(); }
         else { h.st = 'walk'; if (!h.np) { g.saved++; addScore(250, h.x, h.y - 18, t('safe')); } h.np = false; } } }
@@ -534,7 +535,7 @@ function part(x, y, vx, vy, life, col, sz, drag) { var p = P[pHead]; pHead = (pH
 function burst(x, y, n, col, sp, life, implode) { for (var i = 0; i < n; i++) { var a = rng() * 6.283, v = sp * (.25 + rng() * .9);
   if (implode) part(x + Math.cos(a) * v * .5, y + Math.sin(a) * v * .5, -Math.cos(a) * v * .6, -Math.sin(a) * v * .6, life, col, 1.6, 0);
   else part(x, y, Math.cos(a) * v, Math.sin(a) * v, life * (.5 + rng() * .7), col, 1.2 + rng() * 2.2, 1.8); } }
-function trail(s) { part(wrap(s.x - s.face * 13), s.y + (rng() - .5) * 3, -s.face * (60 + rng() * 60) + s.vx * .2, (rng() - .5) * 20, .35 + rng() * .25, rng() < .3 ? '#ffffff' : (rng() < .5 ? '#2dd4bf' : '#e11d2a'), 1.6 + rng() * 1.6, 2); }
+function trail(s) { part(wrap(s.x - s.face * 13 * SHIP_S), s.y + (rng() - .5) * 3, -s.face * (60 + rng() * 60) + s.vx * .2, (rng() - .5) * 20, .35 + rng() * .25, rng() < .3 ? '#ffffff' : (rng() < .5 ? '#2dd4bf' : '#e11d2a'), 1.6 + rng() * 1.6, 2); }
 function pop(x, y, s, c) { POPS.push({ x: x, y: y, s: s, c: c, t: 0 }); if (POPS.length > 12) POPS.shift(); }
 function ring(x, y, c) { RINGS.push({ x: x, y: y, c: c, t: 0 }); if (RINGS.length > 16) RINGS.shift(); }
 function shake(n) { shakeA = Math.max(shakeA, n); }
@@ -606,15 +607,15 @@ function draw(now) {
   if (ringBig && ringBig.t < .6) { var kb = ringBig.t / .6; ctx.strokeStyle = '#fff'; ctx.globalAlpha = 1 - kb; ctx.lineWidth = 6 * (1 - kb) + 1; ctx.beginPath(); ctx.arc(sx(ringBig.x), ringBig.y, 10 + kb * 420, 0, 7); ctx.stroke(); }
   ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
   // ship
-  var sh0 = g.ship; if (!sh0.dead && !(sh0.inv > 0 && Math.floor(tt * 12) % 2)) drawShip(sx(sh0.x), sh0.y, sh0.face, tt, sh0.vx);
+  var sh0 = g.ship; if (!sh0.dead && !(sh0.inv > 0 && Math.floor(tt * 12) % 2)) drawShip(sx(sh0.x), sh0.y, sh0.face, tt, sh0.vx, SHIP_S);
   // score pops
   ctx.textAlign = 'center'; POPS.forEach(function (p) { var k = p.t / 1.1; if (k > 1) return; ctx.globalAlpha = 1 - k * k; ctx.font = '600 ' + (11 + 5 * (1 - k)) + 'px Oswald, sans-serif'; ctx.fillStyle = p.c; ctx.shadowColor = p.c; ctx.shadowBlur = 6; ctx.fillText(p.s, sx(p.x), p.y - k * 26); });
   ctx.shadowBlur = 0; ctx.globalAlpha = 1;
   drawRadar(tt, cam);
   if (flashA > 0) { ctx.setTransform(K, 0, 0, K, 0, 0); ctx.fillStyle = 'rgba(255,255,255,' + Math.min(.85, flashA) + ')'; ctx.fillRect(0, 0, LW, LH); }
 }
-function drawShip(x, y, f, tt, vx) {
-  ctx.save(); ctx.translate(x, y); ctx.scale(f, 1);
+function drawShip(x, y, f, tt, vx, k) {
+  k = k || 1; ctx.save(); ctx.translate(x, y); ctx.scale(f * k, k);
   var fl = 6 + Math.abs(vx) / 25 + Math.random() * 4; ctx.globalCompositeOperation = 'lighter';
   var fg = ctx.createLinearGradient(-12 - fl, 0, -10, 0); fg.addColorStop(0, 'rgba(225,29,42,0)'); fg.addColorStop(1, 'rgba(255,200,120,.95)');
   ctx.fillStyle = fg; ctx.beginPath(); ctx.moveTo(-10, -3); ctx.lineTo(-12 - fl, 0); ctx.lineTo(-10, 3); ctx.fill(); ctx.globalCompositeOperation = 'source-over';
@@ -906,6 +907,8 @@ if (DEBUG) window.RD = {
   killAll: function () { g.spawnLeft = 0; g.aliens.slice().forEach(function (a) { killAlien(a, 'bomb'); }); g.waveKills = E(g.wave); },
   die: function () { g.ship.inv = 0; shipDie(); }, abductAll: function () { g.humans.slice().forEach(function (h) { g.humans.splice(g.humans.indexOf(h), 1); }); checkPlanet(); },
   plausible: function (a, b, c, d) { return plausible(a, b, c, d); }, gc: function () { return window.__gcLog || []; },
+  ship: function () { var s = g.ship; return { x: s.x, y: s.y, face: s.face, S: SHIP_S, inv: s.inv }; }, spawnAt: function (dx, dy, kind) { var a = spawnAlien(kind || 'lander', g.ship.x + dx, g.ship.y + dy); a.st = 'seek'; a.vx = 0; a.fireT = 99; return true; },
+  setShipS: function (v) { SHIP_S = v; },
   drawNow: function () { draw(performance.now()); },
   manual: function (on) { vtManual = on; window.__vt = performance.now(); }, tick: function (ms) { window.__vt += ms; frame(window.__vt); }
 };
