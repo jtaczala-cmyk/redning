@@ -322,6 +322,7 @@ a{color:var(--teal)}
   <div id="mShareRow"><button type="button" class="qrfig" id="mQr"><span class="qrsvg" id="mQrSvg"></span><small data-t="qrLabel">Skann og spill</small></button>
     <div class="col"><button class="btn tl" id="mShare"><svg class="shico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="share">Del spillet</span></button><button class="btn" id="mLb" data-t="lb">Toppliste</button><button class="btn" id="mRules" data-t="howTo">Slik spiller du</button></div></div>
   <button class="btn" id="mIntro" data-t="introBtn">Intro</button>
+  <div style="display:flex;gap:8px"><button class="btn" id="mTilt" style="flex:1">Tilt</button><button class="btn" id="mCal" data-t="calib" hidden>Kalibruj</button></div><p id="tiltMsg" style="text-align:center;color:#fbbf24;font-size:13px;margin:4px 0" hidden></p>
   <p class="mfoot2"><span data-t="free">Laget med lidenskap – gratis for alle</span> · <a class="privl" href="personvern/" data-t="privacy">Personvern</a> · <a class="licl" href="lisenser/" data-t="licences">Lisenser</a></p>
 </div></div>
 
@@ -380,7 +381,7 @@ function localStorageHas() { try { return !!localStorage.getItem(PREF_KEY); } ca
 function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch (e) {} }
 function rules(o) { return '<p class="kk">Redning</p><h2>' + o.h + '</h2>' + o.s.map(function (s) { return '<h3>' + s[0] + '</h3><ul>' + s[1].map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }).join('') + '<p class="mfoot2">' + o.f + ' <a class="privl" href="personvern/">' + o.pv + '</a> · <a class="licl" href="lisenser/">' + o.li + '</a></p><button class="btn main" id="rClose">' + o.c + '</button>'; }
 var T = {
-  no: { privacy: 'Personvern', privacyMore: 'Les mer om personvern', licences: 'Lisenser', skip: 'Hopp over', introBtn: '▶ Intro', i1: 'Rolig vakt. Eneste pilot drikker kaffe.', i2: 'SIRENE! Romkokker fra planeten Gluttonia!', i3: 'Oppskrift: «Menneske, norsk stil»', i4: 'Ikke på min vakt. Kaffen får vente!', i5: 'Kosmisk Kokkecup? Ikke i dag!', w1: 'Kaffen er fortsatt varm, og her er en invasjon', quips: ['Takk! Sjefen min kommer aldri til å tro hvorfor jeg er sen.', 'Jeg skulle bare kjøpe brød!', 'Norsk stil? Jeg er jo fra Bergen!', 'Neste gang tar jeg bussen.', 'Puh! Jeg var nesten lapskaus.', 'Har du litt mer av den kaffen?', 'Mamma! Jeg fløy!', 'Jeg lukter visst litt dill nå …', 'Takk, helt! Fem stjerner.', 'Kan jeg få en autograf?'], chefK: 'Kosmisk Kokkecup · runde {n}', chef: ['Kokk Glorp: «Hvor er ingrediensene mine?!»', 'Kokk Glorp: «Juryen venter! Hvem tar menneskene mine?»', 'Kokk Glorp: «DEN piloten igjen! Med kaffekoppen!»', 'Kokk Glorp: «ARGH! Dobbelt krydder på neste bølge!»'], overChef: ['Kokk Glorp: «Kveldens middag … pizza. Igjen.»', 'Kokk Glorp: «Kveldens middag … pizza. IGJEN.»', 'Kokk Glorp: «Kveldens middag … frossenpizza. Igjen.»', 'Kokk Glorp: «Kveldens middag … pizza. Igjen. Uten ananas.»'], qrLabel: 'Skann og spill', qrShare: 'Skann og spill – del videre', shareTxt: 'Skann koden med kameraet på telefonen for å åpne spillet.', shareBtn: 'Del …', copy: 'Kopier lenke', tagline: 'Redd menneskene', test: 'TESTVERSJON', score: 'Poeng', wave: 'Bølge', hi: 'Rekord', pulse: 'PULS', saved: 'Reddet',
+  no: { tilt: 'Styr med vipping', calib: 'Kalibrer', on: 'PÅ', off: 'AV', tiltDenied: 'Ingen tilgang til bevegelsessensor – berøring brukes.', tiltNone: 'Fant ingen bevegelsessensor – berøring brukes.', tiltCal: 'Kalibrert: denne vinkelen er nøytral.', privacy: 'Personvern', privacyMore: 'Les mer om personvern', licences: 'Lisenser', skip: 'Hopp over', introBtn: '▶ Intro', i1: 'Rolig vakt. Eneste pilot drikker kaffe.', i2: 'SIRENE! Romkokker fra planeten Gluttonia!', i3: 'Oppskrift: «Menneske, norsk stil»', i4: 'Ikke på min vakt. Kaffen får vente!', i5: 'Kosmisk Kokkecup? Ikke i dag!', w1: 'Kaffen er fortsatt varm, og her er en invasjon', quips: ['Takk! Sjefen min kommer aldri til å tro hvorfor jeg er sen.', 'Jeg skulle bare kjøpe brød!', 'Norsk stil? Jeg er jo fra Bergen!', 'Neste gang tar jeg bussen.', 'Puh! Jeg var nesten lapskaus.', 'Har du litt mer av den kaffen?', 'Mamma! Jeg fløy!', 'Jeg lukter visst litt dill nå …', 'Takk, helt! Fem stjerner.', 'Kan jeg få en autograf?'], chefK: 'Kosmisk Kokkecup · runde {n}', chef: ['Kokk Glorp: «Hvor er ingrediensene mine?!»', 'Kokk Glorp: «Juryen venter! Hvem tar menneskene mine?»', 'Kokk Glorp: «DEN piloten igjen! Med kaffekoppen!»', 'Kokk Glorp: «ARGH! Dobbelt krydder på neste bølge!»'], overChef: ['Kokk Glorp: «Kveldens middag … pizza. Igjen.»', 'Kokk Glorp: «Kveldens middag … pizza. IGJEN.»', 'Kokk Glorp: «Kveldens middag … frossenpizza. Igjen.»', 'Kokk Glorp: «Kveldens middag … pizza. Igjen. Uten ananas.»'], qrLabel: 'Skann og spill', qrShare: 'Skann og spill – del videre', shareTxt: 'Skann koden med kameraet på telefonen for å åpne spillet.', shareBtn: 'Del …', copy: 'Kopier lenke', tagline: 'Redd menneskene', test: 'TESTVERSJON', score: 'Poeng', wave: 'Bølge', hi: 'Rekord', pulse: 'PULS', saved: 'Reddet',
     newGame: 'Nytt spill', newGameSub: '3 liv · 3 sjokkpulser', howTo: 'Slik spiller du', toMenu: 'Meny', lb: 'Toppliste', share: 'Del spillet', free: 'Laget med lidenskap – gratis for alle',
     paused: 'Pause', resume: 'Fortsett', again: 'Spill igjen', close: 'Lukk', best: 'Rekord: {s} poeng · beste bølge: {w}', bestNone: 'Ingen rekord ennå – lykke til!',
     dragHint: 'Dra fingeren: opp/ned og til siden · skyter mens du holder', waveBanner: 'Bølge {w}', ready: 'Beskytt menneskene!', cleared: 'Bølge {w} klart!', bonus: 'Bonus {h} × {p} = {s}',
@@ -399,7 +400,7 @@ var T = {
       ['Poeng', ['Griper og mutant 150. Bonus etter hver bølge: 100 × bølge (maks 500) per menneske i live.', '3 liv og 3 sjokkpulser. Ekstra liv og puls for hver 7 500 poeng.', 'Radaren øverst viser hele planeten.']],
       ['Toppliste på nett', ['Topplisten på nett er bare for deg som er 16 år eller eldre (18 i India).', 'Frivillig og av til du krysser av selv. Spillet virker fullt ut uten.']],
       ['Blinkende lys', ['Spillet har eksplosjoner og blinkende lys. Har du epilepsi eller er følsom for lysblink, snakk med en lege før du spiller, og ta pause med en gang hvis du blir svimmel eller uvel.']]] }) },
-  pl: { privacy: 'Prywatność', privacyMore: 'Więcej o prywatności', licences: 'Licencje', skip: 'Pomiń', introBtn: '▶ Intro', i1: 'Spokojny dyżur. Jedyny pilot pije kawę.', i2: 'SYRENA! Kosmiczni kucharze z planety Głodomor!', i3: 'Przepis: „Człowiek po norwesku”', i4: 'Nie na mojej zmianie. Kawa poczeka!', i5: 'Kosmiczny Puchar Kucharzy? Nie dziś!', w1: 'Kawa jeszcze ciepła, a tu inwazja', quips: ['Dzięki! Szef nie uwierzy, czemu się spóźniłem.', 'Wyszedłem tylko po chleb!', 'Po norwesku? Przecież jestem z Radomia!', 'Następnym razem jadę autobusem.', 'Uff! Prawie zostałem gulaszem.', 'Masz jeszcze trochę tej kawy?', 'Mamo! Latałem!', 'Chyba pachnę teraz koperkiem…', 'Dzięki, bohaterze! Pięć gwiazdek.', 'Mogę prosić o autograf?'], chefK: 'Kosmiczny Puchar Kucharzy · runda {n}', chef: ['Szef Glorp: „Gdzie moje składniki?!”', 'Szef Glorp: „Jury czeka! Kto mi zabiera ludzi?”', 'Szef Glorp: „ZNOWU ten pilot! Z kubkiem kawy!”', 'Szef Glorp: „ARGH! Podwójne przyprawy w następnej fali!”'], overChef: ['Szef Glorp: „Dzisiejsza kolacja… pizza. Znowu.”', 'Szef Glorp: „Dzisiejsza kolacja… pizza. ZNOWU.”', 'Szef Glorp: „Dzisiejsza kolacja… mrożona pizza. Znowu.”', 'Szef Glorp: „Dzisiejsza kolacja… pizza. Znowu. Bez ananasa.”'], qrLabel: 'Zeskanuj i graj', qrShare: 'Zeskanuj i graj – podaj dalej', shareTxt: 'Zeskanuj kod aparatem telefonu, aby otworzyć grę.', shareBtn: 'Udostępnij…', copy: 'Kopiuj link', tagline: 'Ratuj ludzi', test: 'WERSJA TESTOWA', score: 'Punkty', wave: 'Fala', hi: 'Rekord', pulse: 'IMPULS', saved: 'Uratowani',
+  pl: { tilt: 'Steruj pochyleniem', calib: 'Kalibruj', on: 'WŁ.', off: 'WYŁ.', tiltDenied: 'Brak dostępu do czujnika ruchu – używam dotyku.', tiltNone: 'Nie znaleziono czujnika ruchu – używam dotyku.', tiltCal: 'Skalibrowano: ten kąt jest neutralny.', privacy: 'Prywatność', privacyMore: 'Więcej o prywatności', licences: 'Licencje', skip: 'Pomiń', introBtn: '▶ Intro', i1: 'Spokojny dyżur. Jedyny pilot pije kawę.', i2: 'SYRENA! Kosmiczni kucharze z planety Głodomor!', i3: 'Przepis: „Człowiek po norwesku”', i4: 'Nie na mojej zmianie. Kawa poczeka!', i5: 'Kosmiczny Puchar Kucharzy? Nie dziś!', w1: 'Kawa jeszcze ciepła, a tu inwazja', quips: ['Dzięki! Szef nie uwierzy, czemu się spóźniłem.', 'Wyszedłem tylko po chleb!', 'Po norwesku? Przecież jestem z Radomia!', 'Następnym razem jadę autobusem.', 'Uff! Prawie zostałem gulaszem.', 'Masz jeszcze trochę tej kawy?', 'Mamo! Latałem!', 'Chyba pachnę teraz koperkiem…', 'Dzięki, bohaterze! Pięć gwiazdek.', 'Mogę prosić o autograf?'], chefK: 'Kosmiczny Puchar Kucharzy · runda {n}', chef: ['Szef Glorp: „Gdzie moje składniki?!”', 'Szef Glorp: „Jury czeka! Kto mi zabiera ludzi?”', 'Szef Glorp: „ZNOWU ten pilot! Z kubkiem kawy!”', 'Szef Glorp: „ARGH! Podwójne przyprawy w następnej fali!”'], overChef: ['Szef Glorp: „Dzisiejsza kolacja… pizza. Znowu.”', 'Szef Glorp: „Dzisiejsza kolacja… pizza. ZNOWU.”', 'Szef Glorp: „Dzisiejsza kolacja… mrożona pizza. Znowu.”', 'Szef Glorp: „Dzisiejsza kolacja… pizza. Znowu. Bez ananasa.”'], qrLabel: 'Zeskanuj i graj', qrShare: 'Zeskanuj i graj – podaj dalej', shareTxt: 'Zeskanuj kod aparatem telefonu, aby otworzyć grę.', shareBtn: 'Udostępnij…', copy: 'Kopiuj link', tagline: 'Ratuj ludzi', test: 'WERSJA TESTOWA', score: 'Punkty', wave: 'Fala', hi: 'Rekord', pulse: 'IMPULS', saved: 'Uratowani',
     newGame: 'Nowa gra', newGameSub: '3 życia · 3 impulsy', howTo: 'Jak grać', toMenu: 'Menu', lb: 'Ranking', share: 'Udostępnij grę', free: 'Stworzone z pasji – za darmo dla wszystkich',
     paused: 'Pauza', resume: 'Graj dalej', again: 'Zagraj ponownie', close: 'Zamknij', best: 'Rekord: {s} pkt · najlepsza fala: {w}', bestNone: 'Jeszcze bez rekordu – powodzenia!',
     dragHint: 'Przesuwaj palcem: góra/dół i w bok · strzela, gdy trzymasz', waveBanner: 'Fala {w}', ready: 'Chroń ludzi!', cleared: 'Fala {w} zaliczona!', bonus: 'Bonus {h} × {p} = {s}',
@@ -418,7 +419,7 @@ var T = {
       ['Punkty', ['Chwytacz i mutant 150. Bonus po każdej fali: 100 × fala (maks. 500) za każdego żywego człowieka.', '3 życia i 3 impulsy. Dodatkowe życie i impuls co 7 500 punktów.', 'Radar u góry pokazuje całą planetę.']],
       ['Ranking online', ['Ranking online jest tylko dla osób, które mają co najmniej 16 lat (w Indiach 18).', 'Dobrowolny i wyłączony, dopóki sam go nie zaznaczysz. Gra działa w pełni bez niego.']],
       ['Migające światła', ['Gra zawiera eksplozje i migające światła. Jeśli masz padaczkę lub jesteś wrażliwy na błyski, porozmawiaj z lekarzem przed grą i od razu zrób przerwę, jeśli poczujesz zawroty głowy lub się źle poczujesz.']]] }) },
-  en: { privacy: 'Privacy', privacyMore: 'More about privacy', licences: 'Licences', skip: 'Skip', introBtn: '▶ Intro', i1: 'A quiet shift. The only pilot sips coffee.', i2: 'SIREN! Space chefs from planet Gluttonia!', i3: 'Recipe: “Human, Norwegian style”', i4: 'Not on my watch. The coffee can wait!', i5: 'Cosmic Chef Cup? Not today!', w1: 'Coffee still warm, and here’s an invasion', quips: ['Thanks! My boss won’t believe why I’m late.', 'I only popped out for bread!', 'Norwegian style? I’m from Leeds!', 'Next time I’m taking the bus.', 'Phew! I was nearly a stew.', 'Got any more of that coffee?', 'Mum! I flew!', 'I think I smell of dill now…', 'Thanks, hero! Five stars.', 'Can I get an autograph?'], chefK: 'Cosmic Chef Cup · round {n}', chef: ['Chef Glorp: “Where are my ingredients?!”', 'Chef Glorp: “The judges are waiting! Who keeps taking my humans?”', 'Chef Glorp: “THAT pilot again! With the coffee mug!”', 'Chef Glorp: “ARGH! Double seasoning on the next wave!”'], overChef: ['Chef Glorp: “Tonight’s dinner… pizza. Again.”', 'Chef Glorp: “Tonight’s dinner… pizza. AGAIN.”', 'Chef Glorp: “Tonight’s dinner… frozen pizza. Again.”', 'Chef Glorp: “Tonight’s dinner… pizza. Again. No pineapple.”'], qrLabel: 'Scan & play', qrShare: 'Scan & play – pass it on', shareTxt: 'Scan the code with your phone camera to open the game.', shareBtn: 'Share…', copy: 'Copy link', tagline: 'Save the humans', test: 'TEST VERSION', score: 'Score', wave: 'Wave', hi: 'Best', pulse: 'PULSE', saved: 'Saved',
+  en: { tilt: 'Tilt control', calib: 'Calibrate', on: 'ON', off: 'OFF', tiltDenied: 'Motion sensor access denied – using touch.', tiltNone: 'No motion sensor found – using touch.', tiltCal: 'Calibrated: this angle is neutral.', privacy: 'Privacy', privacyMore: 'More about privacy', licences: 'Licences', skip: 'Skip', introBtn: '▶ Intro', i1: 'A quiet shift. The only pilot sips coffee.', i2: 'SIREN! Space chefs from planet Gluttonia!', i3: 'Recipe: “Human, Norwegian style”', i4: 'Not on my watch. The coffee can wait!', i5: 'Cosmic Chef Cup? Not today!', w1: 'Coffee still warm, and here’s an invasion', quips: ['Thanks! My boss won’t believe why I’m late.', 'I only popped out for bread!', 'Norwegian style? I’m from Leeds!', 'Next time I’m taking the bus.', 'Phew! I was nearly a stew.', 'Got any more of that coffee?', 'Mum! I flew!', 'I think I smell of dill now…', 'Thanks, hero! Five stars.', 'Can I get an autograph?'], chefK: 'Cosmic Chef Cup · round {n}', chef: ['Chef Glorp: “Where are my ingredients?!”', 'Chef Glorp: “The judges are waiting! Who keeps taking my humans?”', 'Chef Glorp: “THAT pilot again! With the coffee mug!”', 'Chef Glorp: “ARGH! Double seasoning on the next wave!”'], overChef: ['Chef Glorp: “Tonight’s dinner… pizza. Again.”', 'Chef Glorp: “Tonight’s dinner… pizza. AGAIN.”', 'Chef Glorp: “Tonight’s dinner… frozen pizza. Again.”', 'Chef Glorp: “Tonight’s dinner… pizza. Again. No pineapple.”'], qrLabel: 'Scan & play', qrShare: 'Scan & play – pass it on', shareTxt: 'Scan the code with your phone camera to open the game.', shareBtn: 'Share…', copy: 'Copy link', tagline: 'Save the humans', test: 'TEST VERSION', score: 'Score', wave: 'Wave', hi: 'Best', pulse: 'PULSE', saved: 'Saved',
     newGame: 'New game', newGameSub: '3 lives · 3 shock pulses', howTo: 'How to play', toMenu: 'Menu', lb: 'Leaderboard', share: 'Share the game', free: 'Made with passion – free for everyone',
     paused: 'Paused', resume: 'Resume', again: 'Play again', close: 'Close', best: 'Best: {s} points · best wave: {w}', bestNone: 'No best score yet – good luck!',
     dragHint: 'Drag your finger: up/down and sideways · fires while you hold', waveBanner: 'Wave {w}', ready: 'Protect the humans!', cleared: 'Wave {w} cleared!', bonus: 'Bonus {h} × {p} = {s}',
@@ -443,7 +444,7 @@ function pick(k) { var a = tl(k); return a[Math.floor(Math.random() * a.length)]
 function t(k, o) { var s = (T[prefs.lang] || T.no)[k]; if (s == null) s = T.en[k] || k; if (o) s = s.replace(/\{(\w+)\}/g, function (m, n) { return o[n] != null ? o[n] : m; }); return s; }
 function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, prefs.lang === 'en' ? ',' : '\u00a0'); }
 function gameBase() { return location.pathname.replace(/index\.html$/, '').replace(/(pl|en)\/$/, ''); }
-function applyLang() {
+function applyLang() { if (typeof updTilt === 'function') setTimeout(updTilt, 0);
   document.documentElement.lang = prefs.lang === 'no' ? 'nb' : prefs.lang;
   document.querySelectorAll('[data-t]').forEach(function (el) { var v = t(el.getAttribute('data-t')); if (v) el.textContent = v; });
   $('langBtn').textContent = prefs.lang.toUpperCase(); $('kbd').innerHTML = t('kbd');
@@ -507,6 +508,25 @@ function shockPulse() {
   g.bullets.length = 0; ringPulse = { x: g.ship.x, y: g.ship.y, t: 0 }; hud(); track('pulse');
 }
 var input = { x: 0, y: 0, fire: false, touch: null };
+var TILT_KEY = 'redning_tilt_v1';
+var tilt = { on: false, have: false, rx: 0, ry: 0, x0: 0, y0: 0, cal: true, ix: 0, iy: 0, fp: null, last: 0, perm: false };
+try { tilt.on = localStorage.getItem(TILT_KEY) === '1'; } catch (e) {}
+function scrAngle() { var a = screen.orientation && typeof screen.orientation.angle === 'number' ? screen.orientation.angle : (window.orientation || 0); return ((a % 360) + 360) % 360; }
+function tiltDZ(v) { var dz = 3, full = 18, a = Math.abs(v); if (a <= dz) return 0; return Math.sign(v) * Math.min(1, (a - dz) / (full - dz)); }
+window.addEventListener('deviceorientation', function (e) { if (e.beta == null || e.gamma == null) return;
+  var b = e.beta, gm = e.gamma, a = scrAngle(), x, y;
+  if (a === 90) { x = b; y = -gm; } else if (a === 270) { x = -b; y = gm; } else if (a === 180) { x = -gm; y = -b; } else { x = gm; y = b; }
+  if (tilt.cal || tilt.ang !== a) { tilt.x0 = x; tilt.y0 = y; tilt.cal = false; tilt.ang = a; }
+  tilt.rx = x - tilt.x0; tilt.ry = y - tilt.y0; tilt.have = true; tilt.last = Date.now(); });
+function tiltUpdate(dt) { var k = Math.min(1, dt * 10); tilt.ix += (tiltDZ(tilt.rx) - tilt.ix) * k; tilt.iy += (tiltDZ(tilt.ry) - tilt.iy) * k; }
+function tiltMsg(key) { var el = $('tiltMsg'); if (!el) return; el.textContent = key ? t(key) : ''; el.hidden = !key; }
+function updTilt() { var b = $('mTilt'); if (b) b.textContent = t('tilt') + ': ' + t(tilt.on ? 'on' : 'off'); if ($('mCal')) $('mCal').hidden = !tilt.on; }
+function tiltPerm(cb) { var D = window.DeviceOrientationEvent;
+  if (!D) { cb(false, 'tiltNone'); return; }
+  if (tilt.perm || typeof D.requestPermission !== 'function') { tilt.perm = true; cb(true); return; }
+  D.requestPermission().then(function (r) { tilt.perm = r === 'granted'; cb(tilt.perm, 'tiltDenied'); }).catch(function () { cb(false, 'tiltDenied'); }); }
+function setTilt(on) { tilt.on = on; try { localStorage.setItem(TILT_KEY, on ? '1' : '0'); } catch (e) {} updTilt(); }
+
 function step(dt) {
   if (!g) return; g.t += dt; var s = g.ship, i, a, h;
   // ---- ship
@@ -514,10 +534,13 @@ function step(dt) {
   else {
     if (s.inv > 0) s.inv -= dt;
     var ix = input.x, iy = input.y;
-    if (input.touch) { var tt = input.touch; iy = 0; s.y += (tt.ty - s.y) * Math.min(1, dt * 18); ix = tt.dir; }
+    var tlt = tilt.on && tilt.have && Date.now() - tilt.last < 1000; if (tlt) tiltUpdate(dt);
+    if (tlt && !ix && !iy) { ix = tilt.ix; iy = tilt.iy; }
+    else if (input.touch) { var tt = input.touch; iy = 0; s.y += (tt.ty - s.y) * Math.min(1, dt * 18); ix = tt.dir; }
     if (ix) s.face = ix > 0 ? 1 : -1;
     var acc = 520, maxv = 250;
     s.vx += (ix ? ix * acc : -Math.sign(s.vx) * Math.min(Math.abs(s.vx), 300 * dt) / dt) * dt;
+    if (tlt && ix === tilt.ix) s.vx += (ix * maxv - s.vx) * Math.min(1, dt * 4);
     s.vx = Math.max(-maxv, Math.min(maxv, s.vx));
     s.y += iy * 230 * dt; s.y = Math.max(RADAR + 26, Math.min(groundY(s.x) - 12 * SHIP_S, s.y));
     s.x = wrap(s.x + s.vx * dt);
@@ -811,12 +834,13 @@ function frame(now) {
 var tp = null;
 function toLogical(e) { var r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * LW, y: (e.clientY - r.top) / r.height * LH }; }
 cv.addEventListener('pointerdown', function (e) { if (!running || paused || !g) return; audioInit(); e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch (er) {}
+  if (tilt.on && tilt.have) { tilt.fp = e.pointerId; input.fire = true; $('hint2').style.opacity = 0; return; }
   var p = toLogical(e); tp = { id: e.pointerId, x0: p.x, y0: p.y, sy0: g.ship.y, lx: p.x }; input.touch = { ty: g.ship.y, dir: 0 }; $('hint2').style.opacity = 0; });
 cv.addEventListener('pointermove', function (e) { if (!tp || e.pointerId !== tp.id || !g) return; e.preventDefault(); var p = toLogical(e);
   input.touch.ty = tp.sy0 + (p.y - tp.y0) * 1.3;                                       // vertical: 1:1 (slightly amplified) drag
   var dx = p.x - tp.lx; if (Math.abs(dx) > 14) { input.touch.dir = dx > 0 ? 1 : -1; tp.lx = p.x - Math.sign(dx) * 14; } // horizontal: last swipe direction = thrust
   });
-function endTouch(e) { if (tp && (!e || e.pointerId === tp.id)) { tp = null; input.touch = null; } }
+function endTouch(e) { if (tilt.fp != null && (!e || e.pointerId === tilt.fp)) { tilt.fp = null; input.fire = false; } if (tp && (!e || e.pointerId === tp.id)) { tp = null; input.touch = null; } }
 cv.addEventListener('pointerup', endTouch); cv.addEventListener('pointercancel', endTouch);
 $('pulseBtn').addEventListener('pointerdown', function (e) { e.preventDefault(); e.stopPropagation(); audioInit(); shockPulse(); });
 var KEYS = {};
@@ -835,7 +859,7 @@ document.addEventListener('visibilitychange', function () { if (document.hidden 
 var OVS = ['menu', 'rules', 'pause', 'over', 'lb', 'share'];
 function show(id) { $(id).hidden = false; } function hide(id) { $(id).hidden = true; }
 function hideAll() { OVS.forEach(hide); }
-function startGame() { audioInit(); sfx('start'); hideAll(); newGame(); running = true; paused = false; lastTs = 0; $('pulseBtn').hidden = false; placePulse(); $('hint2').style.opacity = 1; hud(); lbRunStart(g); track('game-start'); }
+function startGame() { tilt.cal = true; tilt.ix = tilt.iy = 0; audioInit(); sfx('start'); hideAll(); newGame(); running = true; paused = false; lastTs = 0; $('pulseBtn').hidden = false; placePulse(); $('hint2').style.opacity = 1; hud(); lbRunStart(g); track('game-start'); }
 // Chef Glorp cutscene every 5 waves (story only; gameplay is frozen while it shows)
 var cut = false, cutT = 0, cutDone = null;
 function chefCut(n, done) {
@@ -858,6 +882,12 @@ $('lbClose').onclick = function () { hide('lb'); };
 $('pResume').onclick = resume; $('pMenu').onclick = function () { running = false; g = null; $('pulseBtn').hidden = true; openMenu(); };
 $('oAgain').onclick = function () { startGame(); }; $('oMenu').onclick = function () { g = null; openMenu(); };
 $('pauseBtn').onclick = function () { if (running) { if (paused && !$('pause').hidden) resume(); else if (!paused) pauseGame(); } };
+
+$('mTilt').onclick = function () { if (tilt.on) { setTilt(false); tiltMsg(''); return; }
+  tiltPerm(function (ok, why) { if (ok) { tilt.cal = true; setTilt(true); tiltMsg(''); setTimeout(function () { if (tilt.on && !tilt.have) { setTilt(false); tiltMsg('tiltNone'); } }, 1500); } else { setTilt(false); tiltMsg(why); } }); };
+$('mCal').onclick = function () { tilt.cal = true; tiltMsg('tiltCal'); };
+$('mNew').addEventListener('click', function () { if (tilt.on && !tilt.perm) tiltPerm(function (ok, why) { if (!ok) { setTilt(false); tiltMsg(why); } }); }, true);
+updTilt();
 $('muteBtn').onclick = function () { prefs.mute = !prefs.mute; savePrefs(); audioInit(); updMute(); };
 $('langBtn').onclick = function () { prefs.lang = LANGS[(LANGS.indexOf(prefs.lang) + 1) % 3]; savePrefs(); applyLang(); paintShareQr(); hud(); if (!$('menu').hidden) openMenu(); };
 /* share the game: QR (same as Ufobang: white card, encodes the bare game URL stop60.no/redning/), native share, copy */
