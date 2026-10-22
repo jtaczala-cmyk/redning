@@ -859,7 +859,7 @@ document.addEventListener('visibilitychange', function () { if (document.hidden 
 var OVS = ['menu', 'rules', 'pause', 'over', 'lb', 'share'];
 function show(id) { $(id).hidden = false; } function hide(id) { $(id).hidden = true; }
 function hideAll() { OVS.forEach(hide); }
-function startGame() { tilt.cal = true; tilt.ix = tilt.iy = 0; audioInit(); sfx('start'); hideAll(); newGame(); running = true; paused = false; lastTs = 0; $('pulseBtn').hidden = false; placePulse(); $('hint2').style.opacity = 1; hud(); lbRunStart(g); track('game-start'); }
+function startGame() {window.StopWisdom&&StopWisdom.hide(); tilt.cal = true; tilt.ix = tilt.iy = 0; audioInit(); sfx('start'); hideAll(); newGame(); running = true; paused = false; lastTs = 0; $('pulseBtn').hidden = false; placePulse(); $('hint2').style.opacity = 1; hud(); lbRunStart(g); track('game-start'); }
 // Chef Glorp cutscene every 5 waves (story only; gameplay is frozen while it shows)
 var cut = false, cutT = 0, cutDone = null;
 function chefCut(n, done) {
@@ -924,7 +924,7 @@ var tr = function (k, o) { return t(k, o); };
 var INTRO_KEY = 'redning_intro_v1', INTRO_LEN = 13.5, intro = null;
 var RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
 function introSeen() { try { return !!localStorage.getItem(INTRO_KEY); } catch (e) { return true; } }
-function startIntro() {
+function startIntro() {window.StopWisdom&&StopWisdom.hide();
   hideAll(); g = null; running = false; intro = { t: 0, ev: {}, hum: [], lan: [], ship: { x: -80, y: 200 }, rm: RM };
   for (var i = 0; i < 6; i++) intro.hum.push({ x: 60 + i * 42 + (i > 2 ? 30 : 0), st: 'walk', ph: i * 1.7, y: 0, vy: 0 });
   $('introTap').hidden = false; $('skipBtn').hidden = false; $('pulseBtn').hidden = true; placeSkip(); track('intro');
@@ -1124,5 +1124,7 @@ if (/[?&]nobadge=1/.test(location.search)) document.querySelectorAll('.testbadge
 })();
 
 </script>
+<script src="https://stop60.no/assets/wisdom.js" defer></script>
+<script>addEventListener("load",function(){window.StopWisdom&&StopWisdom.show({before:document.getElementById("mNew")})});</script>
 </body>
 </html>
