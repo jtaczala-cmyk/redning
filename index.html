@@ -449,7 +449,7 @@ function applyLang() { if (typeof updTilt === 'function') setTimeout(updTilt, 0)
   document.querySelectorAll('[data-t]').forEach(function (el) { var v = t(el.getAttribute('data-t')); if (v) el.textContent = v; });
   $('langBtn').textContent = prefs.lang.toUpperCase(); $('kbd').innerHTML = t('kbd');
   $('rulesCard').innerHTML = t('rulesHtml'); $('rClose').onclick = function () { hide('rules'); };
-  var pb = gameBase(), ph = pb + { no: 'personvern/', pl: 'prywatnosc/', en: 'en/privacy/' }[prefs.lang];
+  var pb = gameBase(), ph = pb + { no: 'personvern/', pl: 'personvern/', en: 'en/privacy/' }[prefs.lang];
   document.querySelectorAll('a.privl').forEach(function (el) { el.href = ph; }); document.querySelectorAll('a.licl').forEach(function (el) { el.href = pb + 'lisenser/'; });
   if (!LAUNCH) document.title = 'Redning — ' + t('test').toLowerCase();
 }
