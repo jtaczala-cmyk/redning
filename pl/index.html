@@ -302,66 +302,67 @@ a{color:var(--teal)}
     <button class="ibtn" id="pauseBtn" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg></button>
   </header>
   <section id="hud">
-    <div class="hs"><small data-t="score">Poeng</small><b id="hScore">0</b></div>
-    <div class="hs wv"><small data-t="wave">Bølge</small><b id="hWave">1</b></div>
+    <div class="hs"><small data-t="score">Punkty</small><b id="hScore">0</b></div>
+    <div class="hs wv"><small data-t="wave">Fala</small><b id="hWave">1</b></div>
     <div class="hs hi"><small data-t="hi">Rekord</small><b id="hHi">0</b></div>
   </section>
   <section id="stage"><canvas id="cv" aria-label="Playfield"></canvas>
     <div id="banner"><b id="bnT"></b><small id="bnS"></small></div><div id="toast" role="status" aria-live="polite"></div>
-    <button id="pulseBtn" aria-label="Shock pulse" hidden><span><b>✸</b><span data-t="pulse">PULS</span></span></button>
-    <i id="sai"></i><div id="introTap" hidden></div><button id="skipBtn" hidden data-t="skip">Hopp over</button><div id="hint2" data-t="dragHint"></div>
+    <button id="pulseBtn" aria-label="Shock pulse" hidden><span><b>✸</b><span data-t="pulse">IMPULS</span></span></button>
+    <i id="sai"></i><div id="introTap" hidden></div><button id="skipBtn" hidden data-t="skip">Pomiń</button><div id="hint2" data-t="dragHint">Przesuwaj palcem: góra/dół i w bok · strzela, gdy trzymasz</div>
   </section>
   <p id="kbd" class="auto"></p>
-  <footer id="foot"><span data-t="free">Laget med lidenskap – gratis for alle</span> · <a class="privl" href="/redning/personvern/" data-t="privacy">Personvern</a> · <a class="licl" href="/redning/lisenser/" data-t="licences">Lisenser</a></footer>
+  <footer id="foot"><span data-t="free">Stworzone z pasji – za darmo dla wszystkich</span> · <a class="privl" href="/redning/personvern/" data-t="privacy">Prywatność</a> · <a class="licl" href="/redning/lisenser/" data-t="licences">Licencje</a></footer>
 </div>
 
 <div class="ov" id="menu" hidden><div class="card">
-  <h1 class="wm2">Redning</h1><p class="tsub2" data-t="tagline">Redd menneskene</p>
+  <h1 class="wm2">Redning</h1><p class="tsub2" data-t="tagline">Ratuj ludzi</p>
+  <p class="seo-lead" style="margin:12px 0 4px;line-height:1.55;font-size:0.95rem;max-width:36rem">Redning to darmowa gra zręcznościowa: chwytacze porywają ludzi z ziemi. Zestrzel je, łap ludzi w locie i odstawiaj bezpiecznie – inaczej zmienią się w mutanty. Jeden palec na telefonie, klawiatura na komputerze, na stop60.no.</p>
   <p id="mBest" style="text-align:center;color:var(--mut);font-size:13px"></p>
-  <button class="btn main" id="mNew"><span class="bt"><span data-t="newGame">Nytt spill</span><small data-t="newGameSub">3 liv · 3 sjokkpulser</small></span></button>
-  <div id="mShareRow"><button type="button" class="qrfig" id="mQr"><span class="qrsvg" id="mQrSvg"></span><small data-t="qrLabel">Skann og spill</small></button>
-    <div class="col"><button class="btn tl" id="mShare"><svg class="shico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="share">Del spillet</span></button><button class="btn" id="mLb" data-t="lb">Toppliste</button><button class="btn" id="mRules" data-t="howTo">Slik spiller du</button></div></div>
-  <button class="btn" id="mIntro" data-t="introBtn">Intro</button>
+  <button class="btn main" id="mNew"><span class="bt"><span data-t="newGame">Nowa gra</span><small data-t="newGameSub">3 życia · 3 impulsy</small></span></button>
+  <div id="mShareRow"><button type="button" class="qrfig" id="mQr"><span class="qrsvg" id="mQrSvg"></span><small data-t="qrLabel">Zeskanuj i graj</small></button>
+    <div class="col"><button class="btn tl" id="mShare"><svg class="shico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="share">Udostępnij grę</span></button><button class="btn" id="mLb" data-t="lb">Ranking</button><button class="btn" id="mRules" data-t="howTo">Jak grać</button></div></div>
+  <button class="btn" id="mIntro" data-t="introBtn">▶ Intro</button>
   <div style="display:flex;gap:8px"><button class="btn" id="mTilt" style="flex:1">Tilt</button><button class="btn" id="mCal" data-t="calib" hidden>Kalibruj</button></div><p id="tiltMsg" style="text-align:center;color:#fbbf24;font-size:13px;margin:4px 0" hidden></p>
-  <p class="mfoot2"><span data-t="free">Laget med lidenskap – gratis for alle</span> · <a class="privl" href="/redning/personvern/" data-t="privacy">Personvern</a> · <a class="licl" href="/redning/lisenser/" data-t="licences">Lisenser</a></p>
+  <p class="mfoot2"><span data-t="free">Stworzone z pasji – za darmo dla wszystkich</span> · <a class="privl" href="/redning/personvern/" data-t="privacy">Prywatność</a> · <a class="licl" href="/redning/lisenser/" data-t="licences">Licencje</a></p>
 </div></div>
 
 <div class="ov" id="rules" hidden><div class="card rul" id="rulesCard"></div></div>
 
 <div class="ov" id="chef" hidden><div class="chefBox"><svg viewBox="0 0 120 120" width="112" height="112" aria-hidden="true"><g class="glorp"><ellipse cx="60" cy="78" rx="34" ry="28" fill="#a3e635"/><rect x="40" y="22" width="40" height="22" rx="4" fill="#fff"/><circle cx="44" cy="22" r="11" fill="#fff"/><circle cx="60" cy="15" r="13" fill="#fff"/><circle cx="76" cy="22" r="11" fill="#fff"/><circle cx="47" cy="72" r="9" fill="#fff"/><circle cx="73" cy="72" r="9" fill="#fff"/><circle cx="49" cy="74" r="4" fill="#111"/><circle cx="71" cy="74" r="4" fill="#111"/><path class="brow" d="M36 58 L56 66 M84 58 L64 66" stroke="#14532d" stroke-width="5" stroke-linecap="round"/><path d="M48 94 Q60 86 72 94" stroke="#14532d" stroke-width="4" fill="none" stroke-linecap="round"/><path class="steam" d="M30 50 q-6 -8 0 -16 M90 50 q6 -8 0 -16" stroke="#f87171" stroke-width="3" fill="none"/></g></svg><div class="chefK" id="chefK"></div><div class="chefT" id="chefT"></div><button class="chefSkip" type="button" id="chefSkip">Skip ›</button></div></div>
 <div class="ov" id="pause" hidden><div class="card">
-  <p class="kk" data-t="paused">Pause</p>
-  <button class="btn main" id="pResume" data-t="resume">Fortsett</button>
-  <div class="row"><button class="btn" id="pRules" data-t="howTo">Slik spiller du</button><button class="btn" id="pMenu" data-t="toMenu">Meny</button></div>
+  <p class="kk" data-t="paused">Pauza</p>
+  <button class="btn main" id="pResume" data-t="resume">Graj dalej</button>
+  <div class="row"><button class="btn" id="pRules" data-t="howTo">Jak grać</button><button class="btn" id="pMenu" data-t="toMenu">Menu</button></div>
 </div></div>
 
 <div class="ov" id="over" hidden><div class="card">
   <h2 id="overTitle"></h2>
   <p id="overTxt" style="text-align:center"></p>
-  <div class="stats"><div><b id="osScore">0</b><small data-t="score">Poeng</small></div><div><b id="osWave">1</b><small data-t="wave">Bølge</small></div><div><b id="osSaved">0</b><small data-t="saved">Reddet</small></div></div>
+  <div class="stats"><div><b id="osScore">0</b><small data-t="score">Punkty</small></div><div><b id="osWave">1</b><small data-t="wave">Fala</small></div><div><b id="osSaved">0</b><small data-t="saved">Uratowani</small></div></div>
   <p id="overBest" style="text-align:center"></p>
-  <div class="optin" id="oOpt"><label class="lbl2" for="oNick" data-t="nickLbl">Kallenavn</label><div class="nickrow"><input class="nick" id="oNick" type="text" maxlength="16" autocomplete="nickname" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" /><button class="btn tl" id="oSend" data-t="send">Send</button></div>
-    <label class="chk"><input type="checkbox" id="oChk" /><span data-t="optIn"></span></label><p class="fine"><span data-t="optFine"></span> <a class="privl" href="/redning/personvern/" data-t="privacyMore">Les mer om personvern</a></p><p class="lbmsg" id="oMsg"></p></div>
-  <button class="btn main" id="oAgain" data-t="again">Spill igjen</button>
+  <div class="optin" id="oOpt"><label class="lbl2" for="oNick" data-t="nickLbl">Nick</label><div class="nickrow"><input class="nick" id="oNick" type="text" maxlength="16" autocomplete="nickname" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" /><button class="btn tl" id="oSend" data-t="send">Wyślij</button></div>
+    <label class="chk"><input type="checkbox" id="oChk" /><span data-t="optIn">Mam co najmniej 16 lat (18 w Indiach) i chcę pokazać nick, punkty i falę w rankingu online</span></label><p class="fine"><span data-t="optFine">Nick, punkty i fala będą publiczne. Nie używaj prawdziwego imienia.</span> <a class="privl" href="/redning/personvern/" data-t="privacyMore">Więcej o prywatności</a></p><p class="lbmsg" id="oMsg"></p></div>
+  <button class="btn main" id="oAgain" data-t="again">Zagraj ponownie</button>
   <button type="button" class="btn tl" id="oScoreShare" data-t="shareScore">Udostępnij wynik</button>
-  <div id="overShare"><button type="button" class="qrfig" id="oQr"><span class="qrsvg" id="oQrSvg"></span></button><div class="col"><small data-t="qrShare">Skann og spill – del videre</small><button class="btn tl" id="oShare"><svg class="shico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="share">Del spillet</span></button><div class="row"><button class="btn" id="oLb" data-t="lb">Toppliste</button><button class="btn" id="oMenu" data-t="toMenu">Meny</button></div></div></div>
+  <div id="overShare"><button type="button" class="qrfig" id="oQr"><span class="qrsvg" id="oQrSvg"></span></button><div class="col"><small data-t="qrShare">Zeskanuj i graj – podaj dalej</small><button class="btn tl" id="oShare"><svg class="shico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="share">Udostępnij grę</span></button><div class="row"><button class="btn" id="oLb" data-t="lb">Ranking</button><button class="btn" id="oMenu" data-t="toMenu">Menu</button></div></div></div>
 </div></div>
 
 <div class="ov" id="share" hidden><div class="card" style="text-align:center">
-  <h2 data-t="share">Del spillet</h2>
-  <p data-t="shareTxt" style="margin:2px 0 8px"></p>
+  <h2 data-t="share">Udostępnij grę</h2>
+  <p data-t="shareTxt" style="margin:2px 0 8px">Zeskanuj kod aparatem telefonu, aby otworzyć grę.</p>
   <div id="qrBox"></div>
   <div id="shareUrl"></div>
-  <div class="row"><button class="btn tl" id="sNative" data-t="shareBtn"></button><button class="btn" id="sCopy" data-t="copy"></button></div>
-  <button class="btn" id="sClose" data-t="close">Lukk</button>
+  <div class="row"><button class="btn tl" id="sNative" data-t="shareBtn">Udostępnij…</button><button class="btn" id="sCopy" data-t="copy">Kopiuj link</button></div>
+  <button class="btn" id="sClose" data-t="close">Zamknij</button>
 </div></div>
 
 <div class="ov" id="lb" hidden><div class="card" id="lbCard">
-  <p class="kk" data-t="lbKick">Online</p><h2 data-t="lb">Toppliste</h2>
-  <div class="tabs" role="tablist"><button class="tab on" data-tab="all" data-t="tabAll">Topp 50</button><button class="tab" data-tab="day" data-t="tabDay">I dag</button><button class="tab" data-tab="week" data-t="tabWeek">Denne uka</button></div>
+  <p class="kk" data-t="lbKick">Online</p><h2 data-t="lb">Ranking</h2>
+  <div class="tabs" role="tablist"><button class="tab on" data-tab="all" data-t="tabAll">Top 50</button><button class="tab" data-tab="day" data-t="tabDay">Dziś</button><button class="tab" data-tab="week" data-t="tabWeek">Ten tydzień</button></div>
   <div class="lbl" id="lbList"></div>
-  <p class="lbnote" style="text-align:center;font-size:12px;margin:8px 0 0"><a class="privl" href="/redning/personvern/" data-t="privacyMore">Les mer om personvern</a></p>
-  <button class="btn main" id="lbClose" data-t="close">Lukk</button>
+  <p class="lbnote" style="text-align:center;font-size:12px;margin:8px 0 0"><a class="privl" href="/redning/personvern/" data-t="privacyMore">Więcej o prywatności</a></p>
+  <button class="btn main" id="lbClose" data-t="close">Zamknij</button>
 </div></div>
 <script>
 (function () {
@@ -376,7 +377,7 @@ var LANGS = ['no', 'pl', 'en'];
 function normLang(l) { l = String(l || '').toLowerCase(); if (/^(nb|nn|no)\b/.test(l)) return 'no'; if (/^pl\b/.test(l)) return 'pl'; if (/^en\b/.test(l)) return 'en'; return null; }
 var prefs = { lang: LANGDIR || 'no', mute: false };
 try { var pr = JSON.parse(localStorage.getItem(PREF_KEY) || 'null'); if (pr) { if (normLang(pr.lang)) prefs.lang = normLang(pr.lang); prefs.mute = !!pr.mute; } } catch (e) {}
-if (LANGDIR && !localStorageHas()) prefs.lang = LANGDIR;
+if (LANGDIR) prefs.lang = LANGDIR;
 function localStorageHas() { try { return !!localStorage.getItem(PREF_KEY); } catch (e) { return false; } }
 (function () { var m = /[?&]lang=([a-z]{2})/i.exec(location.search); if (m && normLang(m[1])) prefs.lang = normLang(m[1]); })();
 function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch (e) {} }

@@ -309,7 +309,7 @@ a{color:var(--teal)}
   <section id="stage"><canvas id="cv" aria-label="Playfield"></canvas>
     <div id="banner"><b id="bnT"></b><small id="bnS"></small></div><div id="toast" role="status" aria-live="polite"></div>
     <button id="pulseBtn" aria-label="Shock pulse" hidden><span><b>✸</b><span data-t="pulse">PULS</span></span></button>
-    <i id="sai"></i><div id="introTap" hidden></div><button id="skipBtn" hidden data-t="skip">Hopp over</button><div id="hint2" data-t="dragHint"></div>
+    <i id="sai"></i><div id="introTap" hidden></div><button id="skipBtn" hidden data-t="skip">Hopp over</button><div id="hint2" data-t="dragHint">Dra fingeren: opp/ned og til siden · skyter mens du holder</div>
   </section>
   <p id="kbd" class="auto"></p>
   <footer id="foot"><span data-t="free">Laget med lidenskap – gratis for alle</span> · <a class="privl" href="personvern/" data-t="privacy">Personvern</a> · <a class="licl" href="lisenser/" data-t="licences">Lisenser</a></footer>
@@ -317,12 +317,13 @@ a{color:var(--teal)}
 
 <div class="ov" id="menu" hidden><div class="card">
   <h1 class="wm2">Redning</h1><p class="tsub2" data-t="tagline">Redd menneskene</p>
+  <p class="seo-lead" style="margin:12px 0 4px;line-height:1.55;font-size:0.95rem;max-width:36rem">Redning er et gratis arkadespill: gripere snapper folk fra bakken. Skyt dem, fang menneskene i lufta og sett dem trygt ned – ellers blir de mutanter. Én finger på mobil, tastatur på PC, på stop60.no.</p>
   <p id="mBest" style="text-align:center;color:var(--mut);font-size:13px"></p>
   <button class="btn main" id="mNew"><span class="bt"><span data-t="newGame">Nytt spill</span><small data-t="newGameSub">3 liv · 3 sjokkpulser</small></span></button>
   <div id="mShareRow"><button type="button" class="qrfig" id="mQr"><span class="qrsvg" id="mQrSvg"></span><small data-t="qrLabel">Skann og spill</small></button>
     <div class="col"><button class="btn tl" id="mShare"><svg class="shico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="share">Del spillet</span></button><button class="btn" id="mLb" data-t="lb">Toppliste</button><button class="btn" id="mRules" data-t="howTo">Slik spiller du</button></div></div>
-  <button class="btn" id="mIntro" data-t="introBtn">Intro</button>
-  <div style="display:flex;gap:8px"><button class="btn" id="mTilt" style="flex:1">Tilt</button><button class="btn" id="mCal" data-t="calib" hidden>Kalibruj</button></div><p id="tiltMsg" style="text-align:center;color:#fbbf24;font-size:13px;margin:4px 0" hidden></p>
+  <button class="btn" id="mIntro" data-t="introBtn">▶ Intro</button>
+  <div style="display:flex;gap:8px"><button class="btn" id="mTilt" style="flex:1">Tilt</button><button class="btn" id="mCal" data-t="calib" hidden>Kalibrer</button></div><p id="tiltMsg" style="text-align:center;color:#fbbf24;font-size:13px;margin:4px 0" hidden></p>
   <p class="mfoot2"><span data-t="free">Laget med lidenskap – gratis for alle</span> · <a class="privl" href="personvern/" data-t="privacy">Personvern</a> · <a class="licl" href="lisenser/" data-t="licences">Lisenser</a></p>
 </div></div>
 
@@ -341,7 +342,7 @@ a{color:var(--teal)}
   <div class="stats"><div><b id="osScore">0</b><small data-t="score">Poeng</small></div><div><b id="osWave">1</b><small data-t="wave">Bølge</small></div><div><b id="osSaved">0</b><small data-t="saved">Reddet</small></div></div>
   <p id="overBest" style="text-align:center"></p>
   <div class="optin" id="oOpt"><label class="lbl2" for="oNick" data-t="nickLbl">Kallenavn</label><div class="nickrow"><input class="nick" id="oNick" type="text" maxlength="16" autocomplete="nickname" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" /><button class="btn tl" id="oSend" data-t="send">Send</button></div>
-    <label class="chk"><input type="checkbox" id="oChk" /><span data-t="optIn"></span></label><p class="fine"><span data-t="optFine"></span> <a class="privl" href="personvern/" data-t="privacyMore">Les mer om personvern</a></p><p class="lbmsg" id="oMsg"></p></div>
+    <label class="chk"><input type="checkbox" id="oChk" /><span data-t="optIn">Jeg er 16 år eller eldre (18 i India) og vil vise kallenavn, poeng og bølge på topplisten på nett</span></label><p class="fine"><span data-t="optFine">Kallenavn, poeng og bølge blir offentlige. Ikke bruk ekte navn.</span> <a class="privl" href="personvern/" data-t="privacyMore">Les mer om personvern</a></p><p class="lbmsg" id="oMsg"></p></div>
   <button class="btn main" id="oAgain" data-t="again">Spill igjen</button>
   <button type="button" class="btn tl" id="oScoreShare" data-t="shareScore">Del resultatet</button>
   <div id="overShare"><button type="button" class="qrfig" id="oQr"><span class="qrsvg" id="oQrSvg"></span></button><div class="col"><small data-t="qrShare">Skann og spill – del videre</small><button class="btn tl" id="oShare"><svg class="shico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="share">Del spillet</span></button><div class="row"><button class="btn" id="oLb" data-t="lb">Toppliste</button><button class="btn" id="oMenu" data-t="toMenu">Meny</button></div></div></div>
@@ -349,15 +350,15 @@ a{color:var(--teal)}
 
 <div class="ov" id="share" hidden><div class="card" style="text-align:center">
   <h2 data-t="share">Del spillet</h2>
-  <p data-t="shareTxt" style="margin:2px 0 8px"></p>
+  <p data-t="shareTxt" style="margin:2px 0 8px">Skann koden med kameraet på telefonen for å åpne spillet.</p>
   <div id="qrBox"></div>
   <div id="shareUrl"></div>
-  <div class="row"><button class="btn tl" id="sNative" data-t="shareBtn"></button><button class="btn" id="sCopy" data-t="copy"></button></div>
+  <div class="row"><button class="btn tl" id="sNative" data-t="shareBtn">Del …</button><button class="btn" id="sCopy" data-t="copy">Kopier lenke</button></div>
   <button class="btn" id="sClose" data-t="close">Lukk</button>
 </div></div>
 
 <div class="ov" id="lb" hidden><div class="card" id="lbCard">
-  <p class="kk" data-t="lbKick">Online</p><h2 data-t="lb">Toppliste</h2>
+  <p class="kk" data-t="lbKick">På nett</p><h2 data-t="lb">Toppliste</h2>
   <div class="tabs" role="tablist"><button class="tab on" data-tab="all" data-t="tabAll">Topp 50</button><button class="tab" data-tab="day" data-t="tabDay">I dag</button><button class="tab" data-tab="week" data-t="tabWeek">Denne uka</button></div>
   <div class="lbl" id="lbList"></div>
   <p class="lbnote" style="text-align:center;font-size:12px;margin:8px 0 0"><a class="privl" href="personvern/" data-t="privacyMore">Les mer om personvern</a></p>
@@ -376,7 +377,7 @@ var LANGS = ['no', 'pl', 'en'];
 function normLang(l) { l = String(l || '').toLowerCase(); if (/^(nb|nn|no)\b/.test(l)) return 'no'; if (/^pl\b/.test(l)) return 'pl'; if (/^en\b/.test(l)) return 'en'; return null; }
 var prefs = { lang: LANGDIR || 'no', mute: false };
 try { var pr = JSON.parse(localStorage.getItem(PREF_KEY) || 'null'); if (pr) { if (normLang(pr.lang)) prefs.lang = normLang(pr.lang); prefs.mute = !!pr.mute; } } catch (e) {}
-if (LANGDIR && !localStorageHas()) prefs.lang = LANGDIR;
+if (LANGDIR) prefs.lang = LANGDIR;
 function localStorageHas() { try { return !!localStorage.getItem(PREF_KEY); } catch (e) { return false; } }
 (function () { var m = /[?&]lang=([a-z]{2})/i.exec(location.search); if (m && normLang(m[1])) prefs.lang = normLang(m[1]); })();
 function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch (e) {} }
