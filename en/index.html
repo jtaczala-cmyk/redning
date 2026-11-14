@@ -631,7 +631,7 @@ function checkPlanet() { if (g.humans.length === 0 && !g.planetLost) { g.planetL
   g.aliens.forEach(function (a) { if (a.k === 'grab') { if (a.tgt) a.tgt = null; a.k = 'mut'; a.st = 'chase'; } }); } }
 function gameOver() {
   g.over = true; g.state = 'over'; running = false; sfx('over'); var nb = g.score > stats.best; if (nb) stats.best = g.score; stats.bestWave = Math.max(stats.bestWave, g.wave); saveStats();
-  track('game-finish'); setTimeout(function () { openOver(g, nb); }, 900);
+  track('game-finish'); setTimeout(function () { openOver(g, nb); }, 200);
 }
 
 /* ---------------- effects ---------------- */
