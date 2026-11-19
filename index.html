@@ -932,7 +932,7 @@ $('sCopy').onclick = function () { var u = gameURL(); (navigator.clipboard ? nav
 function scoreSharePath() { return 'stop60.no/redning' + ({ en: '/en', pl: '/pl' }[prefs.lang] || ''); }
 function scoreShareURL() { return 'https://' + scoreSharePath() + '/'; }
 function scoreEmojiBar(n, ch) { n = Math.max(0, Math.floor(+n || 0)); if (n <= 0) return '\u2B1B'; if (n <= 10) return new Array(n + 1).join(ch); return new Array(11).join(ch) + '\u00d7' + n; }
-function scoreShareText() { var b = $('oScoreShare'), sc = b && b.getAttribute('data-score'), w = b && b.getAttribute('data-wave'), sv = b && b.getAttribute('data-saved'); if (sc == null || sc === '') sc = (g && g.score != null) ? g.score : 0; if (w == null || w === '') w = (g && g.wave != null) ? g.wave : 0; if (sv == null || sv === '') sv = (g && g.saved != null) ? g.saved : 0; return t('name') + '\n' + scoreEmojiBar(w, '\uD83D\uDEDF') + '\n' + sv + ' \uD83D\uDC64 \u00b7 ' + sc + '\n' + scoreSharePath(); }
+function scoreShareText() { var b = $('oScoreShare'), sc = b && b.getAttribute('data-score'), w = b && b.getAttribute('data-wave'), sv = b && b.getAttribute('data-saved'); if (sc == null || sc === '') sc = (g && g.score != null) ? g.score : 0; if (w == null || w === '') w = (g && g.wave != null) ? g.wave : 0; if (sv == null || sv === '') sv = (g && g.saved != null) ? g.saved : 0; return 'Redning' + '\n' + scoreEmojiBar(w, '\uD83D\uDEDF') + '\n' + sv + ' \uD83D\uDC64 \u00b7 ' + sc + '\n' + scoreSharePath(); }
 function paintOverGrid() { var grid = $('overGrid'); if (!grid) return; grid.textContent = scoreShareText(); grid.hidden = false; }
 
 (function () {
